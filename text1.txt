@@ -1,0 +1,160 @@
+const linksData = [
+    {
+      title: "Administration",
+      description:
+        "The administration is guided by the Trust and senior leaders like the Chairman, Principal, and Director, ensuring smooth governance and academic quality.",
+      subLinks: [
+        { label: "About Trust", href: "/about-trust", detail: "Overview of the trust that governs SMCE." },
+        { label: "Chairman", href: "#", detail: "Message and profile of our Chairman." },
+        { label: "Secretary", href: "#", detail: "Meet the Secretary overseeing SMCE operations." },
+        { label: "Director", href: "#", detail: "Know more about the Director's vision and mission." },
+        { label: "Vice President", href: "#", detail: "Vice President’s contribution and leadership." },
+        { label: "Principal", href: "#", detail: "Insight into academic leadership by our Principal." },
+      ],
+      contact: {
+        email: "admin@smce.edu.in",
+        phone: "+91-12345-67890",
+        hours: "Mon-Fri, 9AM - 5PM",
+        location: "Admin Block, SMCE Campus",
+      },
+    },
+    {
+      title: "Academics",
+      description:
+        "SMCE offers quality academic programs with a focus on holistic student development through an outcome-based education system.",
+      subLinks: [
+        { label: "Academic Regulations", href: "#", detail: "Rules and guidelines for academic conduct." },
+        { label: "Academic Calendars", href: "#", detail: "Plan your semester with our official calendars." },
+      ],
+      contact: {
+        email: "academics@smce.edu.in",
+        phone: "+91-98765-43210",
+        hours: "Mon-Fri, 9AM - 5PM",
+        location: "Academic Office, SMCE Campus",
+      },
+    },
+    {
+      title: "Admissions",
+      description:
+        "Join a vibrant student community at SMCE with admissions based on merit and reservation norms governed by regulatory bodies.",
+      subLinks: [
+        { label: "Programs Offered", href: "#", detail: "Discover various UG and PG programs." },
+        { label: "Admission Procedure", href: "#", detail: "Steps and requirements for admission." },
+        { label: "Fee Structure", href: "#", detail: "Detailed tuition and fee breakdowns." },
+        { label: "B-Category Application", href: "#", detail: "Apply under management quota." },
+      ],
+      contact: {
+        email: "admissions@smce.edu.in",
+        phone: "+91-99887-77665",
+        hours: "Mon-Fri, 9AM - 5PM",
+        location: "Admissions Office, SMCE Campus",
+      },
+    },
+    {
+      title: "Departments",
+      description:
+        "Each department at SMCE is equipped with experienced faculty and labs, focusing on core engineering disciplines and research.",
+      subLinks: [
+        { label: "CSE", href: "#", detail: "Computer Science Engineering Department." },
+        { label: "CSE - AI", href: "#", detail: "Specialization in Artificial Intelligence." },
+        { label: "CSE - DS", href: "#", detail: "Focus on Data Science technologies." },
+        { label: "IT", href: "#", detail: "Department of Information Technology." },
+        { label: "ECE", href: "#", detail: "Electronics and Communication Engineering." },
+        { label: "SNH", href: "#", detail: "Science & Humanities Department." },
+        { label: "MBA", href: "#", detail: "Master of Business Administration." },
+      ],
+      contact: {
+        email: "hod@smce.edu.in",
+        phone: "+91-88995-44220",
+        hours: "Mon-Fri, 9AM - 5PM",
+        location: "Respective Dept Blocks, SMCE",
+      },
+    },
+    {
+      title: "Examination Cell",
+      description:
+        "The Examination Cell ensures fair conduct of assessments and timely declaration of results under JNTUK guidelines.",
+      subLinks: [
+        { label: "Controller of Examinations", href: "#", detail: "Head of exam-related operations." },
+        { label: "COE", href: "#", detail: "Details about the Examination Cell." },
+        { label: "Examination Tables", href: "#", detail: "Semester-wise examination schedules." },
+        { label: "Results", href: "#", detail: "Access and verify your results." },
+        { label: "Previous Question Papers", href: "#", detail: "Reference for past examinations." },
+        { label: "Contact Information", href: "#", detail: "Reach out to the exam cell." },
+      ],
+      contact: {
+        email: "examcell@smce.edu.in",
+        phone: "+91-90909-10101",
+        hours: "Mon-Fri, 9AM - 5PM",
+        location: "Exam Cell, SMCE Campus",
+      },
+    },
+    {
+      title: "Student Corner",
+      description:
+        "A space dedicated to all student services including clubs, grievance cell, scholarships, and placement support.",
+      subLinks: [
+        { label: "Digital Library", href: "#", detail: "Access ebooks, journals, and more." },
+        { label: "Student Grievance Cell", href: "#", detail: "Submit and resolve grievances." },
+        { label: "Classrooms", href: "#", detail: "Technology-enabled learning spaces." },
+        { label: "Laboratories", href: "#", detail: "State-of-the-art practical labs." },
+        { label: "Hostel", href: "#", detail: "Safe and comfortable accommodation." },
+        { label: "Transport", href: "#", detail: "Commute facilities for students." },
+        { label: "NSS", href: "#", detail: "National Service Scheme at SMCE." },
+        { label: "Health Center", href: "#", detail: "Medical support for students." },
+        { label: "Auditorium", href: "#", detail: "For seminars and student events." },
+        { label: "Canteen", href: "#", detail: "Nutritious food at affordable prices." },
+      ],
+      contact: {
+        email: "student@smce.edu.in",
+        phone: "+91-77777-88888",
+        hours: "Mon-Fri, 9AM - 5PM",
+        location: "Student Affairs Office, SMCE",
+      },
+    },
+    {
+      title: "Statutory Body",
+      description:
+        "Compliance with AICTE, UGC, NAAC, and NBA norms through regular updates and transparent functioning.",
+      subLinks: [
+        { label: "Governing Body", href: "#", detail: "Oversight committee for policy and vision." },
+        { label: "Academic Council", href: "#", detail: "Regulates academic activities and changes." },
+        { label: "Board of Studies", href: "#", detail: "Department-level academic boards." },
+        { label: "BOS", href: "#", detail: "Curriculum and course framework development." },
+        { label: "Finance Committee", href: "#", detail: "Handles budgetary and fund allocation." },
+        { label: "AICTE", href: "#", detail: "Approval and standards by AICTE." },
+        { label: "JNTUK", href: "#", detail: "Affiliating university and norms." },
+        { label: "NBA", href: "#", detail: "Program accreditation and assessment." },
+        { label: "NAAC", href: "#", detail: "Institutional quality assurance body." },
+        { label: "ISO", href: "#", detail: "International quality management certification." },
+        { label: "IQAC", href: "#", detail: "Internal Quality Assurance Cell." },
+        { label: "IIC", href: "#", detail: "Institution Innovation Council at SMCE." },
+        { label: "Anti-Ragging Committee", href: "#", detail: "Preventing ragging through vigilance." },
+        { label: "College Committees", href: "#", detail: "Various functional committees of SMCE." },
+      ],
+      contact: {
+        email: "statutory@smce.edu.in",
+        phone: "+91-66666-55555",
+        hours: "Mon-Fri, 9AM - 5PM",
+        location: "Statutory Office, SMCE",
+      },
+    },
+    {
+      title: "NAAC",
+      description:
+        "Accreditation and assessment reports and activities are documented under NAAC to ensure institutional quality.",
+      subLinks: [
+        { label: "AQAR 2023-24", href: "#", detail: "Annual Quality Assurance Report for 2023-24." },
+        { label: "AQAR 2022-23", href: "#", detail: "Annual Quality Assurance Report for 2022-23." },
+        { label: "ICT", href: "#", detail: "Use of ICT tools in teaching and learning." },
+        { label: "IQAC", href: "#", detail: "IQAC's role in internal quality checks." },
+        { label: "Extended Profile", href: "#", detail: "Quantitative data submitted to NAAC." },
+      ],
+      contact: {
+        email: "naac@smce.edu.in",
+        phone: "+91-33333-22222",
+        hours: "Mon-Fri, 9AM - 5PM",
+        location: "IQAC Room, SMCE",
+      },
+    },
+  ];

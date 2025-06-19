@@ -1,0 +1,10 @@
+.logo-img {
+    height: 60px;
+    margin: 0 24px;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+  }
+  
+  .logo-img:hover {
+    filter: grayscale(0%);
+  }

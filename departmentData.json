@@ -1,0 +1,183 @@
+{
+  "departments": {
+    "CSE": {
+      "title": "COMPUTER SCIENCE & ENGINEERING",
+      "about": "To cater to the growing demand of software professionals from global organizations, Sri Mittapalli College of Engineering (SMCE) has set up an undergraduate course in Computer Science Engineering (B.Tech. CSE) branch in 2006 with an initial intake of 60 and to 420 in the following years. A post graduate course also has been introduced in the year 2010 in Computer Science Engineering (M.Tech. CSE). Center of Excellence Labs have been functioning on cutting edge technologies such as Artificial Intelligence & Machine Learning, IoT, Cyber Security, Cloud & Fog Computing and Software Engineering. Had MoUs with reputed MNCs such as Oracle, Microsoft, CISCO etc to be in tune with industry developments and requirements.",
+      "vision": "To produce professional, ethical and globally competent graduates by imparting quality education in the field of Computer Science & Engineering with capabilities to solve a wide range of complex, scientific, technological and societal problems.",
+      "mission": [
+        "To educate students to the effective problem – solvers and life – long learners in technical, innovative and entrepreneurial skills.",
+        "To impart quality and value based education and contribute towards the advancement of computing, science and technology to raise satisfaction level of all stakeholders.",
+        "To establish a continuous Industry Institute Interaction, participation, collaboration to contribute skilled IT engineers."
+      ],
+      "whyChoose": [
+        "Qualified & Experienced Faculty",
+        "Industry ready course content",
+        "Well planned academic curriculum",
+        "Course delivery through real world applications"
+      ],
+      "focusAreas": [
+        "Deep Learning",
+        "Neural Networks",
+        "Speech Recognition Technologies",
+        "Internet of Things",
+        "Natural Language Processing.",
+        "Robotic Applications",
+        "Cyber Security",
+        "Security Certifications"
+      ],
+      "skillDevelopment": {
+        "codingSkills": [
+          "C",
+          "C++",
+          "Java",
+          "Python",
+          "R Programming",
+          "Java Full Stack Development",
+          "Cloud Programming"
+        ],
+        "hardwareSkills": ["Arduino", "Raspberry Pi Boards"],
+        "softSkills": ["Hobby clubs", "Mock Interviews"]
+      },
+      "peos": [
+        "Graduates able to solve wide range of computing-related problems by applying the knowledge of mathematics and innovative algorithms.",
+        "Graduates pursue advanced degrees with a dedication for lifelong learning and use their skills in an ethical & professional manner.",
+        "To be able to adapt to the evolving technical challenges and changing career opportunities."
+      ],
+      "pos": [
+        "Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems.",
+        "Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using the first principles of mathematics, natural sciences, and engineering sciences.",
+        "Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for public health and safety, and the cultural, societal, and environmental considerations.",
+        "Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions.",
+        "Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations.",
+        "Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice.",
+        "Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development.",
+        "Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice.",
+        "Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings.",
+        "Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions.",
+        "Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments.",
+        "Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change."
+      ],
+      "psos": [
+        "Analyze, Identify the data ,Design suitable algorithm by using Latest software for Real Time Applications.",
+        "Understand the progressive changes in computing posses data of context-aware relevance of paradigms."
+      ],
+      "courseStructure": {
+        "description": "Course Structure for all Years",
+        "note": "Download the Course Structure and Syllabus of four years of CSE course",
+        "pdfs": [
+          "cse_course_structure_years1-2.pdf",
+          "cse_course_structure_years3-4.pdf"
+        ]
+      },
+      "laboratories": {
+        "title": "CSE Laboratories",
+        "description": "We have Fully Equipped Laboratories. We have several Computer Labs equipped with latest software's and workstations. It is connected to internet through a lease line to facilitate high speed internet access. All the computers are connected through a structured network. Printer and copier facilities are also available in the lab. Our dedicated faculty and staff are proud of their impressive credentials, which are comparable to those of the best career instructors.",
+        "images": ["lab1.jpg", "lab2.jpg", "lab3.jpg"]
+      },
+      "faculty": {
+        "columns": [
+          "S.NO",
+          "Faculty Name",
+          "Designation",
+          "Qualification",
+          "Experience",
+          "Date of Joining"
+        ],
+        "data": []
+      },
+      "activitiesAndEvents": "Student Development Activities"
+    },
+  "CSE-AI": {
+    "title": "COMPUTER SCIENCE & ENGINEERING",
+    "about": "To cater to the growing demand of software professionals from global organizations, Sri Mittapalli College of Engineering (SMCE) has set up an undergraduate course in Computer Science Engineering (B.Tech. CSE) branch in 2006 with an initial intake of 60 and to 420 in the following years. A post graduate course also has been introduced in the year 2010 in Computer Science Engineering (M.Tech. CSE). Center of Excellence Labs have been functioning on cutting edge technologies such as Artificial Intelligence & Machine Learning, IoT, Cyber Security, Cloud & Fog Computing and Software Engineering. Had MoUs with reputed MNCs such as Oracle, Microsoft, CISCO etc to be in tune with industry developments and requirements.",
+    "vision": "To produce professional, ethical and globally competent graduates by imparting quality education in the field of Computer Science & Engineering with capabilities to solve a wide range of complex, scientific, technological and societal problems.",
+    "mission": [
+      "To educate students to the effective problem – solvers and life – long learners in technical, innovative and entrepreneurial skills.",
+      "To impart quality and value based education and contribute towards the advancement of computing, science and technology to raise satisfaction level of all stakeholders.",
+      "To establish a continuous Industry Institute Interaction, participation, collaboration to contribute skilled IT engineers."
+    ],
+    "whyChoose": [
+      "Qualified & Experienced Faculty",
+      "Industry ready course content",
+      "Well planned academic curriculum",
+      "Course delivery through real world applications"
+    ],
+    "focusAreas": [
+      "Deep Learning",
+      "Neural Networks",
+      "Speech Recognition Technologies",
+      "Internet of Things",
+      "Natural Language Processing.",
+      "Robotic Applications",
+      "Cyber Security",
+      "Security Certifications"
+    ],
+    "skillDevelopment": {
+      "codingSkills": [
+        "C",
+        "C++",
+        "Java",
+        "Python",
+        "R Programming",
+        "Java Full Stack Development",
+        "Cloud Programming"
+      ],
+      "hardwareSkills": ["Arduino", "Raspberry Pi Boards"],
+      "softSkills": ["Hobby clubs", "Mock Interviews"]
+    },
+    "peos": [
+      "Graduates able to solve wide range of computing-related problems by applying the knowledge of mathematics and innovative algorithms.",
+      "Graduates pursue advanced degrees with a dedication for lifelong learning and use their skills in an ethical & professional manner.",
+      "To be able to adapt to the evolving technical challenges and changing career opportunities."
+    ],
+    "pos": [
+      "Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems.",
+      "Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using the first principles of mathematics, natural sciences, and engineering sciences.",
+      "Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for public health and safety, and the cultural, societal, and environmental considerations.",
+      "Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions.",
+      "Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations.",
+      "Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice.",
+      "Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development.",
+      "Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice.",
+      "Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings.",
+      "Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions.",
+      "Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments.",
+      "Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change."
+    ],
+    "psos": [
+      "Analyze, Identify the data ,Design suitable algorithm by using Latest software for Real Time Applications.",
+      "Understand the progressive changes in computing posses data of context-aware relevance of paradigms."
+    ],
+    "courseStructure": {
+      "description": "Course Structure for all Years",
+      "note": "Download the Course Structure and Syllabus of four years of CSE course",
+      "pdfs": [
+        "cse_course_structure_years1-2.pdf",
+        "cse_course_structure_years3-4.pdf"
+      ]
+    },
+    "laboratories": {
+      "title": "CSE Laboratories",
+      "description": "We have Fully Equipped Laboratories. We have several Computer Labs equipped with latest software's and workstations. It is connected to internet through a lease line to facilitate high speed internet access. All the computers are connected through a structured network. Printer and copier facilities are also available in the lab. Our dedicated faculty and staff are proud of their impressive credentials, which are comparable to those of the best career instructors.",
+      "images": ["lab1.jpg", "lab2.jpg", "lab3.jpg"]
+    },
+    "faculty": {
+      "columns": [
+        "S.NO",
+        "Faculty Name",
+        "Designation",
+        "Qualification",
+        "Experience",
+        "Date of Joining"
+      ],
+      "data": []
+    },
+    "activitiesAndEvents": "Student Development Activities"
+  },
+  "CSE-DS": {},
+  "IT": {},
+  "ECE": {},
+  "S&H": {},
+  "MBA": {}
+}
+}
