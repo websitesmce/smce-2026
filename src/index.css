@@ -14,3 +14,25 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+html, body {
+  scroll-behavior: smooth;
+}
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("/public/fonts/NuberNextWide-Black.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+/* tailwind.css */
+/* Hide scrollbar in all browsers */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

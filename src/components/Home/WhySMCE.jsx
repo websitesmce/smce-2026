@@ -3,28 +3,33 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
 
+import img1 from "../../assets/whysmce/1.JPG";
+import img2 from "../../assets/whysmce/2.JPG";
+import img3 from "../../assets/whysmce/3.jpeg";
+import img4 from "../../assets/whysmce/4.png";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const highlights = [
   {
     title: "Top Rankings",
     desc: "Recognized among the top engineering colleges for academic excellence and student outcomes.",
-    img: "/images/highlight-1.jpg",
+    img: img1,
   },
   {
     title: "Career-Focused Programs",
     desc: "Curriculum designed to align with industry needs, with real-world project exposure.",
-    img: "/images/highlight-2.jpg",
+    img: img2,
   },
   {
     title: "Industry Collaborations",
     desc: "Partnerships with leading MNCs, MoUs, and guest lectures from top professionals.",
-    img: "/images/highlight-3.jpg",
+    img: img3,
   },
   {
     title: "Campus Life & Facilities",
     desc: "A vibrant, inclusive campus with modern labs, sports, and creative spaces.",
-    img: "/images/highlight-4.jpg",
+    img: img4,
   },
 ];
 
@@ -81,12 +86,13 @@ export default function WhySMCE() {
         </h2>
         <p className="mt-4 text-gray-600 max-w-2xl text-sm sm:text-base leading-relaxed">
           With top accreditations, deep industry integration, and student-first
-          learning, SMCE ensures your journey from classroom to career is impactful.
+          learning, SMCE ensures your journey from classroom to career is
+          impactful.
         </p>
       </div>
 
-      {/* Highlights Grid: 2 cols on mobile, 4 on large */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+      {/* Highlights */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-16">
         {highlights.map((item, idx) => (
           <div
             key={idx}

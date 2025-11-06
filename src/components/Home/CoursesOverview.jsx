@@ -1,4 +1,7 @@
+// Import your background image here - update the path as needed
+import coursesBg from "../../assets/img/courses.png";
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,8 +9,11 @@ import departmentData from "../../../departmentData.json";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CourseCard = ({ title, desc, tenure }) => (
-  <div className="fade-in group relative flex flex-col justify-between rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden">
+const CourseCard = ({ title, desc, tenure, href }) => (
+  <Link
+    to={href}
+    className="fade-in group relative flex flex-col justify-between rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+  >
     <div className="p-4 sm:p-5 pb-12 sm:pb-14">
       <h3 className="text-base sm:text-lg font-semibold sm:font-bold text-gray-900 group-hover:text-[#800000] transition-colors">
         {title}
@@ -18,7 +24,7 @@ const CourseCard = ({ title, desc, tenure }) => (
       <span className="text-xs sm:text-sm text-gray-500 font-medium">{tenure}</span>
       <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 text-gray-700 group-hover:text-[#800000] transition-colors" />
     </div>
-  </div>
+  </Link>
 );
 
 function CoursesOverview() {
@@ -32,19 +38,36 @@ function CoursesOverview() {
 
     Object.entries(departmentData.departments).forEach(([key, dept]) => {
       const deptTitle = dept?.title || "";
-      if (["CSE", "CSE-AI", "CSE-DS", "IT", "ECE", "S&H"].includes(key)) {
+      if (["CSE", "CSE-AI", "CSE-DS", "IT", "ECE"].includes(key)) {
         btech.push({
           title: `B.Tech - ${key}`,
           desc: deptTitle,
           tenure: "4 Years",
+          href: `/${key.toLowerCase().replace("s&h", "sh").replace("cse-", "cse-")}-department`,
         });
       } else {
-        pg.push({
-          title: key === "MBA" ? "MBA" : `M.Tech - ${key}`,
-          desc: deptTitle,
-          tenure: "2 Years",
-        });
+        if (key !== "S&H") {
+          pg.push({
+            title: key === "MBA" ? "MBA" : `M.Tech - ${key}`,
+            desc: deptTitle,
+            tenure: "2 Years | Intake: 18",
+            href: `/${key.toLowerCase()}-department`,
+          });
+        }
       }
+    });
+
+    pg.push({
+      title: "M.Tech - CSE",
+      desc: "Computer Science and Engineering",
+      tenure: "2 Years | Intake: 18",
+      href: "/",
+    });
+    pg.push({
+      title: "M.Tech - VLSI & ES",
+      desc: "VLSI Design & Embedded Systems",
+      tenure: "2 Years | Intake: 18",
+      href: "/",
     });
 
     setBtechCourses(btech);
@@ -79,8 +102,12 @@ function CoursesOverview() {
   return (
     <section
       ref={sectionRef}
-      className="bg-gradient-to-br from-white to-gray-50 px-4 sm:px-8 md:px-16 lg:px-24 py-20"
+      className="relative bg-fixed bg-contain bg-center px-4 sm:px-8 md:px-16 lg:px-24 py-20"
+      style={{
+        backgroundImage: `url(${coursesBg})`,
+      }}
     >
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
       <div className="fade-in mb-14 text-left">
         <div className="flex justify-left items-center gap-2 mb-3">
           <div className="h-2 w-2 rounded-full bg-amber-400"></div>
@@ -105,6 +132,7 @@ function CoursesOverview() {
               title={course.title}
               desc={course.desc}
               tenure={course.tenure}
+              href={course.href}
             />
           ))}
         </div>
@@ -120,10 +148,12 @@ function CoursesOverview() {
               title={course.title}
               desc={course.desc}
               tenure={course.tenure}
+              href={course.href}
             />
           ))}
         </div>
       </div>
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
     </section>
   );
 }

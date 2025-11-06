@@ -1,6 +1,8 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import FullScreenMobileMenu from "./FullScreenMobileMenu";
+import { Link } from "react-router-dom";
 
 const linksData = [
   {
@@ -15,27 +17,27 @@ const linksData = [
       },
       {
         label: "Chairman",
-        href: "#",
+        href: "/chairman",
         detail: "Message and profile of our Chairman.",
       },
       {
         label: "Secretary",
-        href: "#",
+        href: "/secretary",
         detail: "Meet the Secretary overseeing SMCE operations.",
       },
       {
         label: "Director",
-        href: "#",
+        href: "/director",
         detail: "Know more about the Director's vision and mission.",
       },
       {
         label: "Vice President",
-        href: "#",
+        href: "/vice-president",
         detail: "Vice President’s contribution and leadership.",
       },
       {
         label: "Principal",
-        href: "#",
+        href: "/principal",
         detail: "Insight into academic leadership by our Principal.",
       },
     ],
@@ -53,12 +55,12 @@ const linksData = [
     subLinks: [
       {
         label: "Academic Regulations",
-        href: "#",
+        href: "/academic-regulations",
         detail: "Rules and guidelines for academic conduct.",
       },
       {
         label: "Academic Calendars",
-        href: "#",
+        href: "/academic-calendars",
         detail: "Plan your semester with our official calendars.",
       },
     ],
@@ -76,12 +78,12 @@ const linksData = [
     subLinks: [
       {
         label: "Programs Offered",
-        href: "#",
+        href: "/programmes-offered",
         detail: "Discover various UG and PG programs.",
       },
       {
         label: "Admission Procedure",
-        href: "#",
+        href: "/admission-procedure",
         detail: "Steps and requirements for admission.",
       },
       {
@@ -91,8 +93,9 @@ const linksData = [
       },
       {
         label: "B-Category Application",
-        href: "#",
+        href: "../../pdfs/b-category-application.pdf",
         detail: "Apply under management quota.",
+        external: true,
       },
     ],
     contact: {
@@ -109,31 +112,39 @@ const linksData = [
     subLinks: [
       {
         label: "CSE",
-        href: "#",
+        href: "/cse-department",
         detail: "Computer Science Engineering Department.",
       },
       {
         label: "CSE - AI",
-        href: "#",
+        href: "/cse-ai-department",
         detail: "Specialization in Artificial Intelligence.",
       },
       {
         label: "CSE - DS",
-        href: "#",
+        href: "/cse-ds-department",
         detail: "Focus on Data Science technologies.",
       },
       {
         label: "IT",
-        href: "#",
+        href: "/it-department",
         detail: "Department of Information Technology.",
       },
       {
         label: "ECE",
-        href: "#",
+        href: "/ece-department",
         detail: "Electronics and Communication Engineering.",
       },
-      { label: "SNH", href: "#", detail: "Science & Humanities Department." },
-      { label: "MBA", href: "#", detail: "Master of Business Administration." },
+      // {
+      //   label: "SNH",
+      //   href: "/sh-department",
+      //   detail: "Science & Humanities Department.",
+      // },
+      {
+        label: "MBA",
+        href: "/mba-department",
+        detail: "Master of Business Administration.",
+      },
     ],
     contact: {
       email: "hod@smce.edu.in",
@@ -149,32 +160,33 @@ const linksData = [
     subLinks: [
       {
         label: "Controller of Examinations",
-        href: "#",
+        href: "/controller-of-examination",
         detail: "Head of exam-related operations.",
       },
+      // {
+      //   label: "COE",
+      //   href: "#",
+      //   detail: "Details about the Examination Cell.",
+      // },
       {
-        label: "COE",
-        href: "#",
-        detail: "Details about the Examination Cell.",
-      },
-      {
-        label: "Examination Tables",
+        label: "Examination Time Tables",
         href: "#",
         detail: "Semester-wise examination schedules.",
       },
       {
         label: "Results",
-        href: "#",
+        href: "https://jntukresults.edu.in/",
         detail: "Access and verify your results.",
+        external: true,
       },
       {
         label: "Previous Question Papers",
-        href: "#",
+        href: "/question-papers",
         detail: "Reference for past examinations.",
       },
       {
         label: "Contact Information",
-        href: "#",
+        href: "/contact-us",
         detail: "Reach out to the exam cell.",
       },
     ],
@@ -192,38 +204,38 @@ const linksData = [
     subLinks: [
       {
         label: "Digital Library",
-        href: "#",
+        href: "/digital-library",
         detail: "Access ebooks, journals, and more.",
       },
       {
         label: "Student Grievance Cell",
-        href: "#",
+        href: "/student-grievance",
         detail: "Submit and resolve grievances.",
       },
       {
         label: "Classrooms",
-        href: "#",
+        href: "/classroom",
         detail: "Technology-enabled learning spaces.",
       },
       {
         label: "Laboratories",
-        href: "#",
+        href: "/laboratories",
         detail: "State-of-the-art practical labs.",
       },
       {
         label: "Hostel",
-        href: "#",
+        href: "/hostel",
         detail: "Safe and comfortable accommodation.",
       },
       {
         label: "Transport",
-        href: "#",
+        href: "/transport",
         detail: "Commute facilities for students.",
       },
       { label: "NSS", href: "#", detail: "National Service Scheme at SMCE." },
       {
         label: "Health Center",
-        href: "#",
+        href: "/health-center",
         detail: "Medical support for students.",
       },
       {
@@ -233,7 +245,7 @@ const linksData = [
       },
       {
         label: "Canteen",
-        href: "#",
+        href: "/canteen",
         detail: "Nutritious food at affordable prices.",
       },
     ],
@@ -251,51 +263,59 @@ const linksData = [
     subLinks: [
       {
         label: "Governing Body",
-        href: "#",
+        href: "/governing-body",
         detail: "Oversight committee for policy and vision.",
       },
       {
         label: "Academic Council",
-        href: "#",
+        href: "/academic-council",
         detail: "Regulates academic activities and changes.",
       },
       {
         label: "Board of Studies",
-        href: "#",
+        href: "/board-of-studies",
         detail: "Department-level academic boards.",
       },
-      {
-        label: "BOS",
-        href: "#",
-        detail: "Curriculum and course framework development.",
-      },
+      // {
+      //   label: "BOS",
+      //   href: "/board-of-studies",
+      //   detail: "Curriculum and course framework development.",
+      // },
       {
         label: "Finance Committee",
-        href: "#",
+        href: "/finance-committe",
         detail: "Handles budgetary and fund allocation.",
       },
-      { label: "AICTE", href: "#", detail: "Approval and standards by AICTE." },
+      {
+        label: "AICTE",
+        href: "/aicte",
+        detail: "Approval and standards by AICTE.",
+      },
       {
         label: "JNTUK",
-        href: "#",
+        href: "../../pdfs/jntuk.pdf",
+        external: true,
         detail: "Affiliating university and norms.",
       },
       {
         label: "NBA",
-        href: "#",
+        href: "../../pdfs/nba.pdf",
+        external: true,
         detail: "Program accreditation and assessment.",
       },
       {
         label: "NAAC",
-        href: "#",
+        href: "../../pdfs/naac.png",
         detail: "Institutional quality assurance body.",
+        external: true
       },
       {
         label: "ISO",
-        href: "#",
+        href: "../../pdfs/ISO.png",
         detail: "International quality management certification.",
+        external: true
       },
-      { label: "IQAC", href: "#", detail: "Internal Quality Assurance Cell." },
+      { label: "IQAC", href: "/iqac", detail: "Internal Quality Assurance Cell." },
       {
         label: "IIC",
         href: "#",
@@ -303,12 +323,12 @@ const linksData = [
       },
       {
         label: "Anti-Ragging Committee",
-        href: "#",
+        href: "/anti-ragging",
         detail: "Preventing ragging through vigilance.",
       },
       {
         label: "College Committees",
-        href: "#",
+        href: "/committees",
         detail: "Various functional committees of SMCE.",
       },
     ],
@@ -326,27 +346,27 @@ const linksData = [
     subLinks: [
       {
         label: "AQAR 2023-24",
-        href: "#",
+        href: "/naac-aqar2023-24",
         detail: "Annual Quality Assurance Report for 2023-24.",
       },
       {
         label: "AQAR 2022-23",
-        href: "#",
+        href: "/naac-aqar2022-23",
         detail: "Annual Quality Assurance Report for 2022-23.",
       },
       {
         label: "ICT",
-        href: "#",
+        href: "/ict",
         detail: "Use of ICT tools in teaching and learning.",
       },
       {
         label: "IQAC",
-        href: "#",
+        href: "/iqac",
         detail: "IQAC's role in internal quality checks.",
       },
       {
         label: "Extended Profile",
-        href: "#",
+        href: "/extended-profile",
         detail: "Quantitative data submitted to NAAC.",
       },
     ],
@@ -426,6 +446,27 @@ function Navigationbar() {
     };
   }, []);
 
+  const handleSubLinkClick = () => {
+    // Kill any ongoing dropdown animation
+    if (dropdownTween.current) {
+      dropdownTween.current.kill();
+    }
+
+    setHoveredIndex(null);
+    setHoveredSubLink(null);
+    isDropdownVisible.current = false;
+
+    // Optionally animate out if you want a fade
+    if (dropdownRef.current) {
+      gsap.to(dropdownRef.current, {
+        y: -20,
+        opacity: 0,
+        duration: 0.35,
+        ease: "power2.inOut",
+      });
+    }
+  };
+
   return (
     <div className="w-full bg-white text-gray-800 border-gray-200 relative z-10 mt-0 pt-3">
       {/* Top Navigation */}
@@ -472,14 +513,28 @@ function Navigationbar() {
                 <ul className="space-y-2">
                   {activeLink.subLinks.map((sublink, i) => (
                     <li key={i}>
-                      <a
-                        href={sublink.href}
-                        className="block px-3 py-1 rounded-md hover:bg-[#800000]/10 hover:text-[#800000] transition-all duration-150 font-medium"
-                        onMouseEnter={() => setHoveredSubLink(i)}
-                        onMouseLeave={() => setHoveredSubLink(null)}
-                      >
-                        {sublink.label}
-                      </a>
+                      {sublink.external ? (
+                        <a
+                          href={sublink.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block px-3 py-1 rounded-md hover:bg-[#800000]/10 hover:text-[#800000] transition-all duration-150 font-medium"
+                          onMouseEnter={() => setHoveredSubLink(i)}
+                          onMouseLeave={() => setHoveredSubLink(null)}
+                        >
+                          {sublink.label}
+                        </a>
+                      ) : (
+                        <Link
+                          to={sublink.href}
+                          className="block px-3 py-1 rounded-md hover:bg-[#800000]/10 hover:text-[#800000] transition-all duration-150 font-medium"
+                          onClick={handleSubLinkClick}
+                          onMouseEnter={() => setHoveredSubLink(i)}
+                          onMouseLeave={() => setHoveredSubLink(null)}
+                        >
+                          {sublink.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -518,6 +573,22 @@ function Navigationbar() {
               </div>
             </div>
 
+            {/* Example: Labs Images (replace this block with your own images) */}
+            {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-10">
+              {Array.from({ length: 8 }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className="aspect-[4/3] bg-gray-200 rounded-lg overflow-hidden shadow-md group"
+                >
+                  <img
+                    src={`https://source.unsplash.com/random/400x300?sig=${idx}&lab`}
+                    alt={`Lab ${idx + 1}`}
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                  />
+                </div>
+              ))}
+            </div> */}
+           
             <div className="text-center text-xs text-gray-500 mt-10 pt-4 border-t border-gray-200">
               © {new Date().getFullYear()} Sri Mittapalli College of
               Engineering. All rights reserved.
