@@ -345,6 +345,11 @@ const linksData = [
       "Accreditation and assessment reports and activities are documented under NAAC to ensure institutional quality.",
     subLinks: [
       {
+        label: "AQAR 2024-25",
+        href: "/naac-aqar2024-25",
+        detail: "Annual Quality Assurance Report for 2023-24.",
+      },
+      {
         label: "AQAR 2023-24",
         href: "/naac-aqar2023-24",
         detail: "Annual Quality Assurance Report for 2023-24.",

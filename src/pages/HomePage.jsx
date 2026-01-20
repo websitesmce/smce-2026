@@ -12,11 +12,12 @@ import AnnouncementsNotifications from '../components/Home/AnnouncementsNotifica
 import Testimonials from '../components/Home/Testimonials';
 import Footer from '../components/Home/Footer';
 import WhatsApp from '../components/Home/hero/WhatsApp';
+import Promotion from '../components/Promotion';
 
 function HomePage() {
   return (
     <div className="w-full overflow-x-hidden">
-
+            <Promotion />
       {/* Page Sections */}
       <section className="w-full">
         <Hero />

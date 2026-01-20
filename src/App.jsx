@@ -53,6 +53,7 @@ import ExtendedProfiles from './pages/NAAC/ExtendedProfiles';
 // IMPORTANT: Adjust this path if the image is located elsewhere relative to App.jsx
 import criticalHeroImage from './assets/home/Hero-imgs/1.jpg'; 
 import GalleryTiles from './components/Home/GalleryTiles';
+import AQAR2024_25 from './pages/NAAC/AQAR2024_25';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -150,6 +151,7 @@ function App() {
             <Route path="/iqac" element={<IQAC />} />
             <Route path="/committees" element={<CommitteesPage />} />
             <Route path="/committees/:id" element={<CommitteeDetails />} />
+            <Route path="/naac-aqar2024-25" element={<AQAR2024_25 />} />
             <Route path="/naac-aqar2023-24" element={<AQAR2023_24 />} />
             <Route path="/naac-aqar2022-23" element={<AQAR2022_23 />} />
             <Route path="/ict" element={<ICT />} />
