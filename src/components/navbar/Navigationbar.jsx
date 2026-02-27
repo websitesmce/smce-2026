@@ -331,6 +331,12 @@ const linksData = [
         href: "/committees",
         detail: "Various functional committees of SMCE.",
       },
+      {
+        label: "Mandatory Disclosure",
+        href: "/src/pdfs/Mandatory-Disclosure/SMCE-MANDATORY DISCLOSURE.pdf",
+        detail: "Mandatory Disclosure document as per AICTE norms.",
+        external: true,
+      },
     ],
     contact: {
       email: "statutory@smce.edu.in",
