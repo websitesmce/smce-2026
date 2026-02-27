@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import FullScreenMobileMenu from "./FullScreenMobileMenu";
@@ -307,15 +306,19 @@ const linksData = [
         label: "NAAC",
         href: "../../pdfs/naac.png",
         detail: "Institutional quality assurance body.",
-        external: true
+        external: true,
       },
       {
         label: "ISO",
         href: "../../pdfs/ISO.png",
         detail: "International quality management certification.",
-        external: true
+        external: true,
       },
-      { label: "IQAC", href: "/iqac", detail: "Internal Quality Assurance Cell." },
+      {
+        label: "IQAC",
+        href: "/iqac",
+        detail: "Internal Quality Assurance Cell.",
+      },
       {
         label: "IIC",
         href: "#",
@@ -333,7 +336,7 @@ const linksData = [
       },
       {
         label: "Mandatory Disclosure",
-        href: "/pdfs/smce-mandatory-disclosure.pdf",
+        href: "/pdfs/mandatory-disclosure.pdf",
         detail: "Mandatory Disclosure document as per AICTE norms.",
         external: true,
       },
@@ -599,7 +602,7 @@ function Navigationbar() {
                 </div>
               ))}
             </div> */}
-           
+
             <div className="text-center text-xs text-gray-500 mt-10 pt-4 border-t border-gray-200">
               © {new Date().getFullYear()} Sri Mittapalli College of
               Engineering. All rights reserved.
