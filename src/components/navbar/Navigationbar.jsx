@@ -333,7 +333,7 @@ const linksData = [
       },
       {
         label: "Mandatory Disclosure",
-        href: "/public/pdfs/SMCE-MANDATORY-DISCLOSURE.pdf",
+        href: "/public/pdfs/smce-mandatory-disclosure.pdf",
         detail: "Mandatory Disclosure document as per AICTE norms.",
         external: true,
       },
