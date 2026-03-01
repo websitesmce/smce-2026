@@ -7,6 +7,7 @@ function Promotion() {
 
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>
+      <h1>Banner</h1>
       <img
         src={promo}
         alt="SMCE Promotion"
