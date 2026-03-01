@@ -41,7 +41,7 @@ import FinanceCommittee from './pages/StatutoryBody/FinanceCommittee';
 import AicteAffiliations from './pages/StatutoryBody/AicteAffiliations';
 import AntiRagging from './pages/StatutoryBody/AntiRagging';
 import IQAC from './pages/StatutoryBody/IQAC';
-import CommitteesPage from './pages/StatutoryBody/committees';
+import CommitteesPage from './pages/StFtutoryBody/committees';
 import CommitteeDetails from './pages/StatutoryBody/CommitteeDetails';
 import LoaderSMCE from './components/navbar/LoaderSMCE';
 import AQAR2023_24 from './pages/NAAC/AQAR2023_24';
