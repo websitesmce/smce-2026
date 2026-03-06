@@ -186,7 +186,7 @@ const aqar2023Data = [
           {
             id: "2.7.1",
             text: "Student Satisfaction Survey (SSS) on overall institutional performance (Institution designs its own questionnaire).",
-            pdf: ""
+            pdf: "/public/pdfs/2.7.pdf"
           }
         ]
       }
