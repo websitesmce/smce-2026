@@ -340,6 +340,18 @@ const linksData = [
         detail: "Mandatory Disclosure document as per AICTE norms.",
         external: true,
       },
+      {
+        label: "NIRF-UG",
+        href: "/pdfs/FINAL-REPORT-ENGG-2026.pdf",
+        detail: "National Institutional Ranking Framework Engineering",
+        external: true,
+      },
+      {
+        label: "NIRF-PG",
+        href: "/pdfs/FINAL-REPORT-MBA-2026.pdf",
+        detail: "National Institutional Ranking Framework MBA",
+        external: true,
+      },
     ],
     contact: {
       email: "statutory@smce.edu.in",
