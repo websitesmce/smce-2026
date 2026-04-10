@@ -27,6 +27,10 @@ function Topbar() {
               Student Portal
               <span className="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full" />
             </a>
+            <a href="https://s18181378.makebizservices.com" className="relative group">
+            MOCK EAPCET- 2026
+              <span className="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full" />
+            </a>
             <a href="/contact-us" className="relative group">
               Contact Us
               <span className="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full" />
