@@ -44,6 +44,9 @@ function Topbar() {
             <a href="/student-portal" title="Student Portal">
               <ClipboardList size={18} />
             </a>
+            <a href="https://s18181378.makebizservices.com" title="Student Portal">
+              <LogIn size={18} />
+            </a>
             <a href="/contact-us" title="Contact Us">
               <Phone size={18} />
             </a>
