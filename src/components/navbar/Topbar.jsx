@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Home,
   Info,
@@ -7,22 +7,12 @@ import {
   Newspaper,
   PartyPopper,
   LogIn,
+  ClipboardList,
 } from "lucide-react";
+
 import logo from "../../assets/logo/logo.png";
-import ExamModal from "./ExamModal";
 
 function Topbar() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = (e) => {
-    e.preventDefault();
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <div className="w-full bg-[#800000] text-white py-2.5 relative z-100">
       <div className="flex justify-between items-center px-4 sm:px-6 md:px-8">
@@ -33,8 +23,8 @@ function Topbar() {
               Home
               <span className="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full" />
             </a>
-            <a href="#" onClick={openModal} className="relative group cursor-pointer">
-              Login
+            <a href="/student-portal" className="relative group">
+              Student Portal
               <span className="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full" />
             </a>
             <a href="/contact-us" className="relative group">
@@ -47,8 +37,8 @@ function Topbar() {
             <a href="/" title="Home">
               <Home size={18} />
             </a>
-            <a href="#" onClick={openModal} title="Login">
-              <LogIn size={18} />
+            <a href="/student-portal" title="Student Portal">
+              <ClipboardList size={18} />
             </a>
             <a href="/contact-us" title="Contact Us">
               <Phone size={18} />
@@ -128,7 +118,6 @@ function Topbar() {
           </div>
         </a>
       </div>
-      <ExamModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 }

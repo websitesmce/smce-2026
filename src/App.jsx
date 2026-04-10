@@ -1,7 +1,10 @@
 // src/App.jsx
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./services/firebase";
+import { Navigate } from "react-router-dom";
 
 // --- Page/Component Imports ---
 import HomePage from './pages/HomePage';
@@ -54,11 +57,39 @@ import ExtendedProfiles from './pages/NAAC/ExtendedProfiles';
 import criticalHeroImage from './assets/home/Hero-imgs/1.jpg'; 
 import GalleryTiles from './components/Home/GalleryTiles';
 import AQAR2024_25 from './pages/NAAC/AQAR2024_25';
+import AdmissionForm from './pages/AdmissionForm';
+import Login from './pages/AdsLeads/pages/Login';
+import Dashboard from './pages/AdsLeads/pages/Dashboard';
+import StudentPortal from './pages/StudentPortal';
+
+function ProtectedRoute({ user, children }) {
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+}
+
+function LayoutWrapper({ children }) {
+  const location = useLocation();
+
+  const shouldHideNavbar =
+    location.pathname === "/login" ||
+    location.pathname.startsWith("/dashboard");
+
+  return (
+    <>
+      {!shouldHideNavbar && <Navbar />}
+      {children}
+    </>
+  );
+}
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [loaderAnimationDone, setLoaderAnimationDone] = useState(false);
   const [criticalImageLoaded, setCriticalImageLoaded] = useState(false);
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
   // 1. Loader Animation Timer (2.5s)
   useEffect(() => {
@@ -104,15 +135,23 @@ function App() {
       }
   }, [loaderAnimationDone, criticalImageLoaded]);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setAuthLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
 
   return (
     <>
-      {loading ? (
+      {loading || authLoading ? (
         <LoaderSMCE />
       ) : (
         <BrowserRouter>
-          <Navbar />
-          <Routes>
+          <LayoutWrapper>
+            <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about-trust" element={<AboutTrust />} />
             <Route path="/chairman" element={<Chairman />} />
@@ -157,8 +196,20 @@ function App() {
             <Route path="/ict" element={<ICT />} />
             <Route path="/extended-profile" element={<ExtendedProfiles />} />
             <Route path="/gallery" element={<GalleryTiles />} />
+            <Route path="/admission-form" element={<AdmissionForm />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/student-portal" element={<StudentPortal />} />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute user={user}>
+                  <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
   
-          </Routes>
+            </Routes>
+          </LayoutWrapper>
         </BrowserRouter>
       )}
     </>

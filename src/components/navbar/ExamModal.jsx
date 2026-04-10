@@ -36,6 +36,14 @@ export default function ExamModal({ isOpen, onClose }) {
           >
             SMCE Exam Cell Portal
           </a>
+          <a
+            href="https://s18181378.makebizservices.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-3 px-5 bg-[#800000] hover:bg-red-800 text-white rounded-md text-center font-medium transition-all"
+          >
+            Mock Test
+          </a>
         </div>
       </div>
     </div>
