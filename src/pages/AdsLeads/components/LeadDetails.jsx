@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { doc, updateDoc, arrayUnion, onSnapshot } from "firebase/firestore";
 import { db } from "../../../services/firebase";
 
 const STATUS_OPTIONS = [
@@ -12,10 +14,39 @@ const STATUS_OPTIONS = [
 
 function LeadDetails({ lead }) {
   const [status, setStatus] = useState(lead?.status || "new");
-  const [scheduleDate, setScheduleDate] = useState("");
+  const [scheduleDate, setScheduleDate] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [note, setNote] = useState("");
+  const [liveLead, setLiveLead] = useState(lead);
 
-  if (!lead) {
+  useEffect(() => {
+    setStatus(lead?.status || "new");
+  }, [lead]);
+
+  useEffect(() => {
+    if (!lead?.id) return;
+
+    const ref = doc(db, "admissions", lead.id);
+
+    const unsubscribe = onSnapshot(ref, (docSnap) => {
+      if (docSnap.exists()) {
+        const updated = { id: docSnap.id, ...docSnap.data() };
+        setLiveLead(updated);
+        setStatus(updated.status || "new");
+
+        if (updated.scheduledAt) {
+          const d = updated.scheduledAt.seconds
+            ? new Date(updated.scheduledAt.seconds * 1000)
+            : new Date(updated.scheduledAt);
+          setScheduleDate(d);
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, [lead]);
+
+  if (!liveLead) {
     return (
       <div className="h-full flex items-center justify-center text-gray-400 text-sm">
         Select a lead
@@ -27,12 +58,38 @@ function LeadDetails({ lead }) {
     try {
       setLoading(true);
 
-      await updateDoc(doc(db, "admissions", lead.id), {
+      let text = "Lead updated";
+
+      // Generate meaningful activity text
+      if (note) {
+        text = note;
+      } else if (status && status !== liveLead.status) {
+        const prev = STATUS_OPTIONS.find((s) => s.value === liveLead.status);
+        const next = STATUS_OPTIONS.find((s) => s.value === status);
+
+        text = `${prev?.label || "New"} → ${next?.label}`;
+      }
+
+      if (scheduleDate) {
+        const formattedDate = scheduleDate.toLocaleString();
+        text = `Follow-up scheduled for ${formattedDate}`;
+      }
+
+      const activity = {
+        type: note ? "note" : "status",
+        from: liveLead.status || "new",
+        to: status,
+        text,
+        createdAt: new Date(),
+      };
+
+      await updateDoc(doc(db, "admissions", liveLead.id), {
         status,
-        scheduledAt: scheduleDate ? new Date(scheduleDate) : null,
+        scheduledAt: scheduleDate || null,
+        activities: arrayUnion(activity),
       });
 
-      alert("Updated successfully");
+      setNote("");
     } catch (err) {
       console.error(err);
       alert("Update failed");
@@ -50,7 +107,7 @@ function LeadDetails({ lead }) {
         {/* Header */}
         <div className="flex items-center justify-between">
           <h2 className="text-[18px] font-semibold text-gray-900">
-            {lead.name || "No Name"}
+            {liveLead.name || "No Name"}
           </h2>
 
           <span className={`text-xs px-3 py-1 rounded-full font-medium ${currentStatus?.color}`}>
@@ -60,11 +117,11 @@ function LeadDetails({ lead }) {
 
         {/* Info */}
         <div className="space-y-3 text-sm text-gray-600">
-          <p><span className="text-gray-400">Phone:</span> {lead.phone}</p>
-          <p><span className="text-gray-400">Email:</span> {lead.email || "-"}</p>
-          <p><span className="text-gray-400">Course:</span> {lead.course}</p>
-          <p><span className="text-gray-400">Branch:</span> {lead.branch}</p>
-          <p><span className="text-gray-400">Location:</span> {lead.village}</p>
+          <p><span className="text-gray-400">Phone:</span> {liveLead.phone}</p>
+          <p><span className="text-gray-400">Email:</span> {liveLead.email || "-"}</p>
+          <p><span className="text-gray-400">Course:</span> {liveLead.course}</p>
+          <p><span className="text-gray-400">Branch:</span> {liveLead.branch}</p>
+          <p><span className="text-gray-400">Location:</span> {liveLead.village}</p>
         </div>
 
         {/* Divider */}
@@ -89,11 +146,26 @@ function LeadDetails({ lead }) {
           {/* Schedule */}
           <div>
             <label className="text-xs text-gray-500 block mb-1">Schedule Follow Up</label>
-            <input
-              type="datetime-local"
-              value={scheduleDate}
-              onChange={(e) => setScheduleDate(e.target.value)}
+            <DatePicker
+              selected={scheduleDate}
+              onChange={(date) => setScheduleDate(date)}
+              showTimeSelect
+              timeIntervals={15}
+              dateFormat="Pp"
+              placeholderText="Select date & time"
               className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 transition"
+            />
+          </div>
+
+          {/* Notes */}
+          <div>
+            <label className="text-xs text-gray-500 block mb-1">Add Note</label>
+            <textarea
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="Type update or follow-up note..."
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 transition resize-none"
+              rows={3}
             />
           </div>
 
@@ -105,6 +177,8 @@ function LeadDetails({ lead }) {
           >
             {loading ? "Updating..." : "Save Changes"}
           </button>
+
+        
 
         </div>
       </div>

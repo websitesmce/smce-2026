@@ -10,7 +10,7 @@ export default function ContactPage() {
     const formData = new FormData(form);
 
     try {
-      const res = await fetch("https://formsubmit.co/ajax/benjuda19@gmail.com", {
+      const res = await fetch("https://formsubmit.co/ajax/admin@smce.ac.in", {
         method: "POST",
         headers: {
           Accept: "application/json",

@@ -3,7 +3,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../../services/firebase";
 import { useNavigate } from "react-router-dom";
 
-function Navbar({ activeTab = "new", onTabChange }) {
+function Navbar({ activeTab = "new", onTabChange, onRefresh }) {
   const navigate = useNavigate();
 
   const tabs = [
@@ -29,7 +29,10 @@ function Navbar({ activeTab = "new", onTabChange }) {
           {tabs.map((tab) => (
             <button
               key={tab.key}
-              onClick={() => onTabChange && onTabChange(tab.key)}
+              onClick={() => {
+                onTabChange && onTabChange(tab.key);
+                onRefresh && onRefresh();
+              }}
               className={`px-4 py-2 rounded-md text-sm font-medium transition ${
                 activeTab === tab.key
                   ? "bg-[#800000] text-white"
@@ -46,7 +49,10 @@ function Navbar({ activeTab = "new", onTabChange }) {
           <select
             className="md:hidden border rounded-md px-2 py-1 text-sm"
             value={activeTab}
-            onChange={(e) => onTabChange && onTabChange(e.target.value)}
+            onChange={(e) => {
+              onTabChange && onTabChange(e.target.value);
+              onRefresh && onRefresh();
+            }}
           >
             {tabs.map((tab) => (
               <option key={tab.key} value={tab.key}>
