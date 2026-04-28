@@ -2,6 +2,8 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../services/firebase";
 import { useNavigate } from "react-router-dom";
+import smceLogo from "../../../assets/logo/logo.png";
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -33,7 +35,7 @@ function Login() {
         <div className="w-full max-w-md">
           
           <div className="flex justify-center mb-6">
-            <img src="/src/assets/logo/logo.png" alt="SMCE Logo" className="h-16" />
+            <img src={smceLogo} alt="SMCE Logo" className="h-16" />
           </div>
 
           <h1 className="text-2xl font-semibold text-center text-[#800000] mb-2">
