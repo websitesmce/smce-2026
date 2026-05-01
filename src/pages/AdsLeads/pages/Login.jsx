@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../services/firebase";
 import { useNavigate } from "react-router-dom";
 import smceLogo from "../../../assets/logo/logo.png";
-
+import imageRight from "/src/assets/home/Hero-imgs/9.jpg"
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -35,7 +35,7 @@ function Login() {
         <div className="w-full max-w-md">
           
           <div className="flex justify-center mb-6">
-            <img src={smceLogo} alt="SMCE Logo" className="h-16" />
+            <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="h-16" />
           </div>
 
           <h1 className="text-2xl font-semibold text-center text-[#800000] mb-2">
@@ -103,7 +103,8 @@ function Login() {
       {/* RIGHT SIDE */}
       <div className="relative hidden lg:block">
         <img
-          src="/src/assets/home/Hero-imgs/9.jpg"
+        loading="lazy"
+          src={imageRight}
           alt="College"
           className="absolute inset-0 w-full h-full object-cover"
         />
