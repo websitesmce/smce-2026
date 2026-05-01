@@ -67,6 +67,7 @@ export default function HealthCenter() {
           {/* Image */}
           <div>
             <img
+            loading="lazy"
               src="/images/healthcenter.jpg"
               alt="Health Center"
               className="w-full h-72 object-cover rounded-xl shadow-md"

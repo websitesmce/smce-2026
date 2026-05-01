@@ -89,6 +89,7 @@ export default function VisionMission() {
       {/* Vision */}
       <div className="fade-in relative w-full h-[70vh] mb-32 rounded-3xl overflow-hidden shadow-xl">
         <img
+        loading="lazy"
           src={visionImage}
           alt="Vision"
           className="absolute inset-0 w-full h-full object-cover object-center opacity-90"

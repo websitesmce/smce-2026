@@ -193,6 +193,7 @@ export default function StudentGrievance() {
     {/* Optional Image */}
     <div className="w-full h-full">
       <img
+      loading="lazy"
         src="/images/grievance-resolution.jpg"
         alt="Grievance resolution illustration"
         className="rounded-xl w-full h-auto object-cover shadow-md"

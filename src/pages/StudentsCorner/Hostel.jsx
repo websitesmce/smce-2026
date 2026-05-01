@@ -101,7 +101,8 @@ export default function Hostel() {
       >
         <div className="rounded-xl overflow-hidden shadow-lg">
           <img
-            src="/images/hostel-view.jpg" // Replace this with your actual image path
+          loading="lazy"
+            src="/images/hostel-view.jpg" 
             alt="Inside View of Hostel"
             className="w-full h-72 sm:h-96 object-cover"
           />

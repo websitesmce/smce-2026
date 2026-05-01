@@ -64,6 +64,7 @@ export default function DigitalLibrary() {
 
           <div className="bg-white rounded-xl shadow overflow-hidden">
             <img
+            loading="lazy"
               src="/images/library-books.jpg"
               alt="Library Books"
               className="object-cover w-full h-full"

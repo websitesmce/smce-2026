@@ -153,6 +153,7 @@ export default function ProgrammesOffered() {
           className="fixed z-50 pointer-events-none w-64 bg-white rounded-xl shadow-lg p-4 border border-gray-200"
         >
           <img
+          loading="lazy"
             src={hoveredItem.image}
             alt={hoveredItem.program}
             className="w-full h-32 object-cover rounded-lg mb-2"

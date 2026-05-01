@@ -70,6 +70,7 @@ export default function SMCETitle() {
       >
         {/* Logo */}
         <img
+        loading="lazy"
           ref={logoRef}
           src={logo}
           alt="SMCE Logo"

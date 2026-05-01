@@ -127,10 +127,12 @@ export default function AdmissionProcedure() {
               key={i}
               className="rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition duration-300 bg-white"
             >
-              <div
-                className="h-88 bg-cover bg-center"
-                style={{ backgroundImage: `url(${card.img})` }}
-              ></div>
+              <img
+                src={card.img}
+                alt={card.title}
+                loading="lazy"
+                className="h-88 w-full object-cover"
+              />
               <div className="p-5">
                 <h4 className="text-xl font-bold mb-2 text-gray-800">
                   {card.title}

@@ -66,6 +66,7 @@ export default function Transport() {
           {/* Image */}
           <div className="w-full">
             <img
+            loading="lazy"
               src="/images/college-bus.jpg"
               alt="College Bus"
               className="rounded-xl shadow-md w-full object-cover h-72 sm:h-80"

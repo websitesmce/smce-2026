@@ -52,6 +52,7 @@ export default function Principal() {
       {/* Main Content */}
       <div className="max-w-5xl mx-auto text-center">
         <img
+        loading="lazy"
           src={PrincipalImage}
           alt="Principal"
           className="w-44 sm:w-52 md:w-60 aspect-[3/4] mx-auto rounded-xl object-cover mb-6 princ-reveal"

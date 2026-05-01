@@ -66,6 +66,7 @@ export default function Canteen() {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Image */}
           <img
+          loading="lazy"
             src="/images/canteen.jpg"
             alt="Canteen"
             className="w-full h-72 object-cover rounded-xl shadow-md"

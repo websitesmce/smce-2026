@@ -56,6 +56,7 @@ function PlacementsCareers() {
         className="flex-shrink-0 w-32 sm:w-36 md:w-40 h-16 grayscale hover:grayscale-0 transition duration-300 flex items-center justify-center"
       >
         <img
+        loading="lazy"
           src={logo}
           alt={`Recruiter logo ${i + 1}`}
           className="h-12 sm:h-14 object-contain"

@@ -119,6 +119,7 @@ export default function AdmissionsInfo() {
             <p className="text-sm text-gray-500 mb-4 flex-1">{item.description}</p>
             <div className="w-full aspect-[4/3] rounded-xl overflow-hidden shadow-sm">
               <img
+              loading="lazy"
                 src={item.image}
                 alt={item.title}
                 className="w-full h-full object-cover"

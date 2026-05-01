@@ -124,6 +124,7 @@ export default function Laboratories() {
             className="relative group rounded-xl overflow-hidden shadow-lg transition-transform hover:scale-[1.02]"
           >
             <img
+            loading="lazy"
               src={lab.image}
               alt={lab.label}
               className="w-full h-64 object-cover"

@@ -137,6 +137,7 @@ export default function DepartmentECE() {
 
             <div className="grid md:grid-cols-2 gap-10 items-start">
               <img
+              loading="lazy"
                 src={departmentImage}
                 alt="ECE Department"
                 className="rounded-xl w-full h-auto object-cover shadow-md"
@@ -472,6 +473,7 @@ export default function DepartmentECE() {
                       className="aspect-[4/3] bg-gray-200 rounded-lg overflow-hidden shadow-md group"
                     >
                       <img
+                      loading="lazy"
                         src={imgSrc}
                         alt={`Lab ${idx + 1}`}
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"

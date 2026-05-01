@@ -222,6 +222,7 @@ function StudentPortal() {
             <div className="flex-shrink-0 w-28 h-28 md:w-40 md:h-40 flex items-center justify-center overflow-hidden rounded-2xl">
               {shuffledQuotes[quoteIndex].image ? (
                 <img
+                loading="lazy"
                   src={shuffledQuotes[quoteIndex].image}
                   alt={shuffledQuotes[quoteIndex].author}
                   className={`w-full h-full object-cover rounded-2xl shadow-md transition-opacity duration-500 ${fade ? "opacity-100" : "opacity-0"}`}

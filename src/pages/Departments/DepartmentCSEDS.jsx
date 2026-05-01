@@ -591,6 +591,7 @@ export default function DepartmentCSEDS() {
                       className="aspect-[4/3] bg-gray-200 rounded-lg overflow-hidden shadow-md group"
                     >
                       <img
+                      loading="lazy"
                         src={imgSrc}
                         alt={`Lab ${idx + 1}`}
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"

@@ -100,6 +100,7 @@ export default function WhySMCE() {
           >
             <div className="relative w-full aspect-[3/4] overflow-hidden">
               <img
+              loading="lazy"
                 src={item.img}
                 alt={item.title}
                 className="w-full h-full object-cover"

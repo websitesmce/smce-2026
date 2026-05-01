@@ -212,7 +212,7 @@ export default function ContactPage() {
             <h3 className="text-2xl sm:text-3xl font-bold text-[#800000] mb-6 text-center">Principal</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Prof. Dr. S. Gopi Krishna</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">Principal</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9032727017" className="text-blue-600">9032727017</a></div>
@@ -226,14 +226,14 @@ export default function ContactPage() {
             <h3 className="text-2xl sm:text-3xl font-bold text-[#800000] mb-6 text-center">Administration</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Ch. Srinivasa Rao</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">Administrative Officer</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9000447117" className="text-blue-600">9000447117</a></div>
                 <div className="text-sm text-gray-700 break-words">✉️ <a href="mailto:smce.principal@gmail.com" className="text-blue-600">smce.principal@gmail.com</a></div>
               </div>
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">V. Srinivasa Rao</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">Office Superintendent</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9247745046" className="text-blue-600">9247745046</a></div>
@@ -247,7 +247,7 @@ export default function ContactPage() {
             <h3 className="text-2xl sm:text-3xl font-bold text-[#800000] mb-6 text-center">IQAC</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Dr. Sk. J. Shareef</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">IQAC Coordinator</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:8885527777" className="text-blue-600">88855 27777</a></div>
@@ -262,7 +262,7 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
               {/* HoD, CSE & IT */}
               <div id="hod-cse" className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Dr. M. V. Pavan Kumar</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">HoD, CSE &amp; IT</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9966077732" className="text-blue-600">99660 77732</a></div>
@@ -270,7 +270,7 @@ export default function ContactPage() {
               </div>
               {/* HoD, AI & DS */}
               <div id="hod-it-ai-ds" className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Dr. J. Siva Sankar Babu</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">HoD, AI &amp; DS</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9398487218" className="text-blue-600">93984 87218</a></div>
@@ -278,7 +278,7 @@ export default function ContactPage() {
               </div>
               {/* HoD, ECE */}
               <div id="hod-ece" className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Prof. P. M. Subhani</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">HoD, ECE</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9885004373" className="text-blue-600">98850 04373</a></div>
@@ -286,7 +286,7 @@ export default function ContactPage() {
               </div>
               {/* HoD, S&H (Part A) */}
               <div id="hod-sha" className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Dr. M. Venkata Ramana</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">HoD, S&amp;H (Part A)</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9948866873" className="text-blue-600">99488 66873</a></div>
@@ -294,7 +294,7 @@ export default function ContactPage() {
               </div>
               {/* HoD, S&H (Part B) */}
               <div id="hod-shb" className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Dr. V. Madhuri</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">HoD, S&amp;H (Part B)</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9849569101" className="text-blue-600">98495 69101</a></div>
@@ -302,7 +302,7 @@ export default function ContactPage() {
               </div>
               {/* HoD, MBA */}
               <div id="hod-mba" className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Dr. Sk. J. Shareef</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">HoD, MBA</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:8885527777" className="text-blue-600">88855 27777</a></div>
@@ -316,14 +316,14 @@ export default function ContactPage() {
             <h3 className="text-2xl sm:text-3xl font-bold text-[#800000] mb-6 text-center">Controller of Examinations</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Dr. M. Nageswara Rao</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">Controller of Examinations</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9121214729" className="text-blue-600">91212 14729</a></div>
                 <div className="text-sm text-gray-700 break-words">✉️ <a href="mailto:cemittapalli@gmail.com" className="text-blue-600">cemittapalli@gmail.com</a></div>
               </div>
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Mr. P. Pradeep</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">Asst. Controller of Examinations</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9121214729" className="text-blue-600">91212 14729</a></div>
@@ -337,7 +337,7 @@ export default function ContactPage() {
             <h3 className="text-2xl sm:text-3xl font-bold text-[#800000] mb-6 text-center">Training &amp; Placement Cell</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Prof. K. Vijay Kumar</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">Training &amp; Placement Officer</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:7382442092" className="text-blue-600">73824 42092</a></div>
@@ -351,7 +351,7 @@ export default function ContactPage() {
             <h3 className="text-2xl sm:text-3xl font-bold text-[#800000] mb-6 text-center">R &amp; D Cell</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Dr. T. Mahesh Babu</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">R&amp;D Cell Coordinator</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9440495073" className="text-blue-600">94404 95073</a></div>
@@ -365,7 +365,7 @@ export default function ContactPage() {
             <h3 className="text-2xl sm:text-3xl font-bold text-[#800000] mb-6 text-center">NSS Coordinator</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Prof. G. Raj Kumar</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">NSS Coordinator</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:9985892136" className="text-blue-600">99858 92136</a></div>
@@ -379,7 +379,7 @@ export default function ContactPage() {
             <h3 className="text-2xl sm:text-3xl font-bold text-[#800000] mb-6 text-center">Transport Coordinators</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center break-words">
-                <img src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
+                <img loading="lazy" src={smceLogo} alt="SMCE Logo" className="w-12 h-12 mx-auto mb-4 rounded-full" />
                 <div className="text-xl font-bold text-gray-900 mb-1 break-words">Prof. Y. Ashok</div>
                 <div className="text-sm font-semibold text-[#800000] mb-2 break-words">Transport Coordinator</div>
                 <div className="text-sm text-gray-700 mb-1 break-words">📞 <a href="tel:8074531061" className="text-blue-600">80745 31061</a></div>

@@ -96,6 +96,7 @@ function Topbar() {
           "
           >
             <img
+            loading="lazy"
               src={logo}
               alt="SMCE Logo"
               className="h-6 sm:h-7 lg:h-8 object-contain"

@@ -73,7 +73,7 @@ export default function AdmissionForm() {
 
       {/* Logo */}
       <div className="flex justify-center mb-6">
-        <img src="/src/assets/logo/logo.png" alt="SMCE Logo" className="h-20" />
+        <img loading="lazy" src="/src/assets/logo/logo.png" alt="SMCE Logo" className="h-20" />
       </div>
 
       {/* Heading */}

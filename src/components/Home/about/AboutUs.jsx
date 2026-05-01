@@ -229,7 +229,7 @@ export default function AboutUs() {
             className="w-32 sm:w-40 md:w-48 rounded-2xl overflow-hidden filter saturate-[0.8] transition hover:saturate-100 cursor-pointer absolute left-0 top-[20%] md:top-[10%] xl:top-[-40%]"
             ref={(el) => (imageRefs.current[0] = el)}
           >
-            <img src={statImage1} alt="Image 1" className="w-full h-auto object-cover rounded-2xl" />
+            <img src={statImage1} alt="Image 1" loading="lazy" className="w-full h-auto object-cover rounded-2xl" />
           </div>
 
           {/* Center big image */}
@@ -237,7 +237,7 @@ export default function AboutUs() {
             className="w-64 sm:w-80 md:w-96 rounded-3xl overflow-hidden filter saturate-[0.8] transition hover:saturate-100 cursor-pointer z-10"
             ref={(el) => (imageRefs.current[1] = el)}
           >
-            <img src={statImage2} alt="Image 2" className="w-full h-auto object-cover rounded-3xl" />
+            <img src={statImage2} alt="Image 2" loading="lazy" className="w-full h-auto object-cover rounded-3xl" />
           </div>
 
           {/* Right smaller image */}
@@ -245,7 +245,7 @@ export default function AboutUs() {
             className="w-32 sm:w-40 md:w-48 rounded-2xl overflow-hidden filter saturate-[0.8] transition hover:saturate-100 cursor-pointer absolute right-0 top-[90%] xl:top-[90%]"
             ref={(el) => (imageRefs.current[2] = el)}
           >
-            <img src={statImage3} alt="Image 3" className="w-full h-auto object-cover rounded-2xl" />
+            <img src={statImage3} alt="Image 3" loading="lazy" className="w-full h-auto object-cover rounded-2xl" />
           </div>
         </div>
       </div>

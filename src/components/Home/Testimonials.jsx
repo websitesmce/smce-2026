@@ -99,6 +99,7 @@ export default function Testimonials() {
               }`}
             >
               <img
+              loading="lazy"
                 src={t.image}
                 alt={t.name}
                 className="w-20 h-20 mx-auto rounded-full object-cover shadow mb-4"
