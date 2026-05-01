@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./services/firebase";
 import { Navigate } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 // --- Page/Component Imports ---
 import HomePage from './pages/HomePage';
@@ -210,6 +211,7 @@ function App() {
   
             </Routes>
           </LayoutWrapper>
+          <Analytics />
         </BrowserRouter>
       )}
     </>

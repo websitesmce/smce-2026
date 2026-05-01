@@ -13,6 +13,7 @@
     "@studio-freight/lenis": "^1.0.42",
     "@tabler/icons-react": "^3.34.0",
     "@tailwindcss/vite": "^4.1.8",
+    "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
     "firebase": "^12.11.0",
     "framer-motion": "^12.18.1",
