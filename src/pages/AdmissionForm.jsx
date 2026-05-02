@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { db } from "../services/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import logo from "../assets/logo/logo.png"
 
 const villages = [
   "Guntur",
@@ -73,7 +74,7 @@ export default function AdmissionForm() {
 
       {/* Logo */}
       <div className="flex justify-center mb-6">
-        <img loading="lazy" src="/src/assets/logo/logo.png" alt="SMCE Logo" className="h-20" />
+        <img loading="lazy" src={logo} alt="SMCE Logo" className="h-20" />
       </div>
 
       {/* Heading */}
