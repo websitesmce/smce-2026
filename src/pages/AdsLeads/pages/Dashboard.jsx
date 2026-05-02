@@ -5,11 +5,13 @@ import Navbar from "../components/Navbar";
 import LeadTable from "../components/LeadTable";
 import LeadDetails from "../components/LeadDetails";
 import ActivityPanel from "../components/ActivityPanel";
+import DownloadModal from "../components/DownloadModal";
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("new");
   const [selectedLead, setSelectedLead] = useState(null);
   const [unsubscribeLead, setUnsubscribeLead] = useState(null);
+  const [isDownloadOpen, setIsDownloadOpen] = useState(false);
 
   const handleSelectLead = (lead) => {
     // Cleanup previous listener
@@ -36,7 +38,11 @@ function Dashboard() {
     <div className="h-screen flex flex-col bg-gray-100">
       
       {/* Top Navbar */}
-      <Navbar activeTab={activeTab} onTabChange={setActiveTab} />
+      <Navbar
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        onOpenDownload={() => setIsDownloadOpen(true)}
+      />
 
       {/* Main Layout */}
       <div className="flex flex-1 overflow-hidden gap-4 p-4">
@@ -72,6 +78,10 @@ function Dashboard() {
         </div>
 
       </div>
+      <DownloadModal
+        isOpen={isDownloadOpen}
+        onClose={() => setIsDownloadOpen(false)}
+      />
     </div>
   );
 }

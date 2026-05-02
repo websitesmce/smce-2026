@@ -1,11 +1,28 @@
 import React, { useEffect, useRef } from "react";
 
+
 const STATUS_OPTIONS = {
   new: "border-blue-300",
   followup: "border-yellow-300",
   pending: "border-orange-300",
   admission: "border-green-300",
   closed: "border-red-300",
+};
+
+const STATUS_LABELS = {
+  new: "New",
+  followup: "Follow Up",
+  visit: "College Visit",
+  pending: "Pending",
+  admission: "Admission",
+  closed: "Closed",
+};
+
+const TYPE_STYLES = {
+  status: "bg-blue-50 text-blue-700 border-blue-100",
+  task: "bg-green-50 text-green-700 border-green-100",
+  note: "bg-gray-100 text-gray-700 border-gray-200",
+  default: "bg-gray-100 text-gray-600 border-gray-200",
 };
 
 function ActivityPanel({ lead }) {
@@ -35,7 +52,7 @@ function ActivityPanel({ lead }) {
     }
   };
 
-  // Sort latest first
+  // Sort oldest first (chat-like flow)
   const sortedActivities = activities.sort((a, b) => {
     const aTime = a?.createdAt?.seconds
       ? a.createdAt.seconds * 1000
@@ -45,7 +62,7 @@ function ActivityPanel({ lead }) {
       ? b.createdAt.seconds * 1000
       : new Date(b?.createdAt || 0).getTime();
 
-    return bTime - aTime;
+    return aTime - bTime;
   });
 
   // Empty state when no lead selected
@@ -86,28 +103,47 @@ function ActivityPanel({ lead }) {
             return (
               <div
                 key={idx}
-                className={`p-4 rounded-2xl bg-white border-l-4 ${borderColor} border-t border-r border-b border-gray-100 shadow-sm hover:shadow-md transition`}
+                className={`p-4 rounded-2xl bg-white/90 backdrop-blur-md border-l-4 ${borderColor} border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300`}
               >
-                <p className="text-sm text-gray-800 leading-relaxed">
-                  {act.type === "status" ? (
-                    <div className="space-y-1">
-                      <div className="font-medium text-gray-900">
-                        {act.from} → {act.to}
-                      </div>
-                      {act.text && (
-                        <div className="text-sm text-gray-600">
-                          {act.text}
+                <div className="space-y-2">
+                  {/* Top Row */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      {/* Type Chip */}
+                      <span
+                        className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
+                          TYPE_STYLES[act.type] || TYPE_STYLES.default
+                        }`}
+                      >
+                        {act.type || "activity"}
+                      </span>
+
+                      {/* Status Transition */}
+                      {act.type === "status" && (
+                        <div className="flex items-center gap-1 text-xs">
+                          <span className="px-2 py-0.5 rounded bg-gray-100 text-gray-600">
+                            {STATUS_LABELS[act.from] || act.from}
+                          </span>
+                          <span className="text-gray-400">→</span>
+                          <span className="px-2 py-0.5 rounded bg-gray-900 text-white">
+                            {STATUS_LABELS[act.to] || act.to}
+                          </span>
                         </div>
                       )}
                     </div>
-                  ) : (
-                    act.text || "No message"
-                  )}
-                </p>
 
-                <p className="text-xs text-gray-400 mt-2">
-                  {formatDate(act.createdAt)}
-                </p>
+                    <span className="text-[11px] text-gray-400">
+                      {formatDate(act.createdAt)}
+                    </span>
+                  </div>
+
+                  {/* Message */}
+                  {act.text && (
+                    <div className="text-sm text-gray-700 leading-relaxed">
+                      {act.text}
+                    </div>
+                  )}
+                </div>
               </div>
             );
           })

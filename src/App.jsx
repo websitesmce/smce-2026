@@ -144,10 +144,13 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  const location = window.location.pathname;
+
+  const shouldSkipLoader = location === "/login" || location.startsWith("/dashboard");
 
   return (
     <>
-      {loading || authLoading ? (
+      {!shouldSkipLoader && (loading || authLoading) ? (
         <LoaderSMCE />
       ) : (
         <BrowserRouter>

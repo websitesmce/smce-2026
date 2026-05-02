@@ -89,21 +89,16 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
     return () => unsubscribe();
   }, [activeTab, selectedDate]);
 
-  // Filter based on tab
+  // Filter based on tab and status filter
   const filteredLeads = leads.filter((lead) => {
-    // Show ALL leads in "new" tab but prioritize new ones
-    if (activeTab === "new") return true;
-
     // Scheduled tab (query already filters by selectedDate)
-    if (activeTab === "scheduled") {
-      if (!lead.scheduledAt) return false;
-    }
+    if (activeTab === "scheduled" && !lead.scheduledAt) return false;
 
-    // Status filter
+    // Unlabeled tab
+    if (activeTab === "unlabeled" && lead.status) return false;
+
+    // Status filter (applies to ALL tabs)
     if (statusFilter !== "all" && lead.status !== statusFilter) return false;
-
-    // Unlabeled (no status at all)
-    if (activeTab === "unlabeled") return !lead.status;
 
     return true;
   });
@@ -114,6 +109,8 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
         return "bg-blue-100 text-blue-700 border border-blue-200";
       case "followup":
         return "bg-yellow-100 text-yellow-700 border border-yellow-200";
+      case "visit":
+        return "bg-purple-100 text-purple-700 border border-purple-200";
       case "pending":
         return "bg-orange-100 text-orange-700 border border-orange-200";
       case "closed":
@@ -175,13 +172,17 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
         )}
 
         <div className="flex gap-2 flex-wrap">
-          {["all","new","followup","pending","admission","closed"].map((s) => (
+          {["all","new","followup","visit","pending","admission","closed"].map((s) => (
             <button
               key={s}
               onClick={() => setStatusFilter(s)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border backdrop-blur-sm ${statusFilter === s ? "bg-gray-900 text-white shadow-md" : "bg-white/70 text-gray-600 hover:bg-gray-100 hover:text-gray-800"}`}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border backdrop-blur-sm hover:scale-[1.03] ${statusFilter === s ? "bg-gray-900 text-white shadow-md" : "bg-white/70 text-gray-600 hover:bg-gray-100 hover:text-gray-800"}`}
             >
-              {s}
+              {s === "followup"
+                ? "Follow Up"
+                : s === "visit"
+                ? "College Visit"
+                : s.charAt(0).toUpperCase() + s.slice(1)}
             </button>
           ))}
         </div>
@@ -189,7 +190,11 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
 
       <div className="px-4 pt-4 pb-1">
         <h2 className="text-sm font-semibold text-gray-700">
-          {activeTab === "scheduled" ? "Today’s Follow-ups" : "Leads"}
+          {activeTab === "scheduled"
+            ? new Date(selectedDate).toDateString() === new Date().toDateString()
+              ? "Today’s Follow-ups"
+              : `Follow-ups • ${selectedDate.toLocaleDateString()}`
+            : "Leads"}
         </h2>
       </div>
 
@@ -205,7 +210,17 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
               {/* Date Header */}
               <div className="px-4 mb-2">
                 <p className="text-[11px] text-gray-400 font-medium tracking-wider uppercase">
-                  {new Date(dateKey).toLocaleDateString()}
+                  {(() => {
+                    const date = new Date(dateKey);
+                    const today = new Date();
+                    const tomorrow = new Date();
+                    tomorrow.setDate(today.getDate() + 1);
+
+                    if (date.toDateString() === today.toDateString()) return "Today";
+                    if (date.toDateString() === tomorrow.toDateString()) return "Tomorrow";
+
+                    return date.toLocaleDateString();
+                  })()}
                 </p>
               </div>
 
@@ -214,7 +229,21 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
                   <div
                     key={lead.id}
                     onClick={() => onSelectLead && onSelectLead(lead)}
-                    className="p-5 mx-3 rounded-2xl border border-gray-100 bg-white/80 backdrop-blur-md shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                    className={`p-5 mx-3 rounded-2xl border border-gray-100 bg-white/80 backdrop-blur-md shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer border-l-4 ${
+                      lead.status === "new"
+                        ? "border-l-blue-400"
+                        : lead.status === "followup"
+                        ? "border-l-yellow-400"
+                        : lead.status === "visit"
+                        ? "border-l-purple-400"
+                        : lead.status === "pending"
+                        ? "border-l-orange-400"
+                        : lead.status === "admission"
+                        ? "border-l-green-400"
+                        : lead.status === "closed"
+                        ? "border-l-red-400"
+                        : "border-l-gray-300"
+                    }`}
                   >
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-[17px] font-semibold text-gray-900 tracking-tight">
@@ -237,7 +266,7 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
                     <div className="flex items-center justify-between mt-3">
                       <div className="flex items-center gap-2">
                         <Phone size={14} className="text-gray-400" />
-                        <p className="text-[14px] font-medium text-gray-800 tracking-wide">
+                        <p className="text-[14px] font-medium text-gray-800 tracking-wide truncate max-w-[140px]">
                           {lead.phone || "No phone"}
                         </p>
                       </div>
@@ -249,7 +278,7 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
                               e.stopPropagation();
                               handleTaskUpdate(lead, "done");
                             }}
-                            className="text-[11px] px-2 py-1 rounded-md bg-green-100 text-green-700 hover:bg-green-200 transition"
+                            className="text-[11px] px-2.5 py-1 rounded-md bg-green-100 text-green-700 hover:bg-green-200 shadow-sm hover:shadow transition-all duration-200"
                           >
                             Done
                           </button>
@@ -259,7 +288,7 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
                               e.stopPropagation();
                               handleTaskUpdate(lead, "missed");
                             }}
-                            className="text-[11px] px-2 py-1 rounded-md bg-red-100 text-red-700 hover:bg-red-200 transition"
+                            className="text-[11px] px-2.5 py-1 rounded-md bg-red-100 text-red-700 hover:bg-red-200 shadow-sm hover:shadow transition-all duration-200"
                           >
                             Missed
                           </button>
