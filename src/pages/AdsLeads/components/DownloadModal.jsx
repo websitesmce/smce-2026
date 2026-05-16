@@ -10,6 +10,10 @@ function DownloadModal({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
+  const formatDateKey = (date) => {
+    return new Date(date).toLocaleDateString("en-CA");
+  };
+
   const handleDownload = async () => {
     if (!fromDate || !toDate) {
       alert("Please select both dates");
@@ -38,26 +42,77 @@ function DownloadModal({ isOpen, onClose }) {
         return;
       }
 
-      const data = snapshot.docs.map((doc) => {
-        const d = doc.data();
-        return {
+      const groupedData = {};
+
+      snapshot.docs.forEach((docSnap) => {
+        const d = docSnap.data();
+
+        const createdDate = d.createdAt?.seconds
+          ? new Date(d.createdAt.seconds * 1000)
+          : new Date();
+
+        const dateKey = formatDateKey(createdDate);
+
+        if (!groupedData[dateKey]) {
+          groupedData[dateKey] = [];
+        }
+
+        let leadStage = "Pending";
+
+        if (d.outcome) {
+          leadStage = d.outcome;
+        } else if (d.status === "admission") {
+          leadStage = "Admission Confirmed";
+        } else if (d.status === "closed") {
+          leadStage = "Dead Lead";
+        }
+
+        groupedData[dateKey].push({
           "Lead Name": d.name || "",
           "Phone Number": d.phone || "",
           "Email Address": d.email || "",
           Course: d.course || "",
           Branch: d.branch || "",
-          Status: d.status || "",
-          "Created At": d.createdAt?.seconds
-            ? new Date(d.createdAt.seconds * 1000).toLocaleString()
-            : "",
+          Location: d.village || "",
+          Status: d.status || "Pending",
+          "Lead Stage": leadStage,
+          "Follow Up Outcome": d.outcome || "Pending",
+          "Scheduled Follow Up": d.scheduledAt?.seconds
+            ? new Date(d.scheduledAt.seconds * 1000).toLocaleString()
+            : "-",
+          "Created At": createdDate.toLocaleString(),
+        });
+      });
+
+      const wb = XLSX.utils.book_new();
+
+      Object.keys(groupedData).forEach((dateKey) => {
+        const ws = XLSX.utils.json_to_sheet(groupedData[dateKey]);
+
+        XLSX.utils.book_append_sheet(
+          wb,
+          ws,
+          dateKey.slice(0, 31)
+        );
+      });
+
+      const summaryData = snapshot.docs.map((docSnap) => {
+        const d = docSnap.data();
+
+        return {
+          Name: d.name || "",
+          Phone: d.phone || "",
+          Course: d.course || "",
+          Branch: d.branch || "",
+          Status: d.status || "Pending",
+          Outcome: d.outcome || "Pending",
         };
       });
 
-      const ws = XLSX.utils.json_to_sheet(data);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Leads");
+      const summarySheet = XLSX.utils.json_to_sheet(summaryData);
+      XLSX.utils.book_append_sheet(wb, summarySheet, "All Leads Summary");
 
-      const fileName = `leads_${fromDate}_to_${toDate}.xlsx`;
+      const fileName = `SMCE_Leads_${fromDate}_to_${toDate}.xlsx`;
       XLSX.writeFile(wb, fileName);
 
       onClose();
@@ -103,7 +158,7 @@ function DownloadModal({ isOpen, onClose }) {
         {/* Header */}
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold text-gray-900 tracking-tight">
-            Download Leads
+            Export Leads Report
           </h2>
           <button
             onClick={onClose}
@@ -113,6 +168,9 @@ function DownloadModal({ isOpen, onClose }) {
             ✕
           </button>
         </div>
+        <p className="text-xs text-gray-400 mt-1">
+          Download grouped Excel sheets by date with lead stages, outcomes, and follow-up details.
+        </p>
 
         {/* Quick Filters */}
         <div className="flex gap-2 flex-wrap">

@@ -23,6 +23,10 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
     setSelectedDate(d);
   };
 
+  const handleToday = () => {
+    setSelectedDate(new Date());
+  };
+
   const handleTaskUpdate = async (lead, status) => {
     try {
       let noteText = "";
@@ -158,16 +162,70 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
 
   return (
     <div className="h-full bg-white overflow-y-auto">
-      <div className="px-4 pt-4 space-y-3">
-        {activeTab === "scheduled" && (
-          <div className="flex items-center gap-3">
-            <button onClick={handlePrevDay} className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm bg-white hover:bg-gray-100 transition shadow-sm">←</button>
-            <DatePicker
-              selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
-              className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
-            />
-            <button onClick={handleNextDay} className="px-3 py-1.5 border border-gray-200 rounded-lg text-sm bg-white hover:bg-gray-100 transition shadow-sm">→</button>
+      <div className="sticky top-0 z-20 border-b border-gray-100 bg-white/90 backdrop-blur-xl px-4 pt-4 pb-4 space-y-4 shadow-sm">
+        {(activeTab === "scheduled" || activeTab === "new") && (
+          <div className="rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-4 shadow-sm">
+
+            {/* Top Row */}
+            <div className="space-y-4">
+              <div className="flex items-start justify-between gap-3 flex-wrap">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-gray-400 font-semibold">
+                  {activeTab === "scheduled" ? "Scheduled Follow Ups" : "Lead Timeline"}
+                </p>
+
+                <h2 className="mt-1 text-xl font-bold text-gray-900 tracking-tight">
+                  {new Date(selectedDate).toDateString() === new Date().toDateString()
+                    ? "Today"
+                    : selectedDate.toLocaleDateString("en-IN", {
+                        weekday: "short",
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                </h2>
+                </div>
+              </div>
+              {(activeTab === "scheduled" || activeTab === "new") && (
+              <div className="flex items-center gap-2 flex-wrap border-t border-gray-100 pt-3">
+                <button
+                  onClick={handlePrevDay}
+                  className="h-11 w-11 rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm transition-all duration-200 hover:-translate-y-[1px] hover:bg-gray-100 hover:shadow-md"
+                >
+                  ←
+                </button>
+
+                <button
+                  onClick={handleToday}
+                  className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 shadow-sm ${
+                    new Date(selectedDate).toDateString() === new Date().toDateString()
+                      ? "bg-[#800000] text-white shadow-[#80000030]"
+                      : "border border-gray-200 bg-white text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  Today
+                </button>
+
+                <div className="relative">
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={(date) => setSelectedDate(date)}
+                    dateFormat="dd MMM yyyy"
+                    className="rounded-xl border border-gray-200 bg-white px-4 py-2.5 pr-10 text-sm font-medium text-gray-700 shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#80000030]"
+                  />
+
+                  <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+                    📅
+                  </span>
+                </div>
+
+                <button
+                  onClick={handleNextDay}
+                  className="h-11 w-11 rounded-xl border border-gray-200 bg-white text-gray-700 shadow-sm transition-all duration-200 hover:-translate-y-[1px] hover:bg-gray-100 hover:shadow-md"
+                >
+                  →
+                </button>
+              </div>
+              )}
           </div>
         )}
 
@@ -194,7 +252,7 @@ function LeadTable({ activeTab = "new", onSelectLead }) {
             ? new Date(selectedDate).toDateString() === new Date().toDateString()
               ? "Today’s Follow-ups"
               : `Follow-ups • ${selectedDate.toLocaleDateString()}`
-            : "Leads"}
+            : `Leads • ${selectedDate.toLocaleDateString()}`}
         </h2>
       </div>
 

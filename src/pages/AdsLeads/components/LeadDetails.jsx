@@ -105,64 +105,93 @@ function LeadDetails({ lead }) {
   const currentStatus = STATUS_OPTIONS.find((s) => s.value === status);
 
   return (
-    <div className="h-full p-5 overflow-y-auto">
-      <div className="rounded-2xl border border-gray-100 bg-white/90 backdrop-blur-md shadow-sm hover:shadow-lg transition-all duration-300 p-6 space-y-6">
+    <div className="h-full overflow-y-auto bg-[#f8fafc] p-4 lg:p-5">
+      <div className="rounded-[28px] border border-gray-200/80 bg-white shadow-[0_10px_40px_rgba(15,23,42,0.06)] transition-all duration-300 p-6 lg:p-7 space-y-7">
 
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <h2 className="text-[20px] font-semibold text-gray-900 tracking-tight">
-            {liveLead.name || "No Name"}
-          </h2>
+        <div className="flex items-start justify-between gap-4 flex-wrap">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-gray-400 font-semibold">
+              Lead Profile
+            </p>
 
-          <span className={`text-[11px] px-3 py-1 rounded-full font-semibold tracking-wide shadow-sm ${currentStatus?.color}`}>
-            {currentStatus?.label}
-          </span>
+            <h2 className="mt-1 text-[28px] leading-tight font-bold text-gray-900 tracking-tight">
+              {liveLead.name || "No Name"}
+            </h2>
+
+            <p className="mt-1 text-sm text-gray-500">
+              Admissions Lead Management
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className={`text-[11px] px-4 py-2 rounded-full font-semibold tracking-wide shadow-sm ${currentStatus?.color}`}>
+              {currentStatus?.label}
+            </span>
+          </div>
         </div>
 
         {/* Info */}
-        <div className="space-y-3 text-sm text-gray-600 leading-relaxed">
-          <p className="flex justify-between gap-3">
-            <span className="text-gray-400">Phone</span>
-            <span className="text-gray-800 font-medium text-right break-words max-w-[60%]">
-              {liveLead.phone}
-            </span>
-          </p>
-          <p className="flex justify-between gap-3">
-            <span className="text-gray-400">Email</span>
-            <span className="text-gray-800 font-medium text-right break-words max-w-[60%]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <div className="rounded-2xl border border-gray-100 bg-[#fafafa] p-4">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-gray-400 font-semibold">
+              Phone
+            </p>
+            <p className="mt-2 text-sm font-semibold text-gray-900 break-words">
+              {liveLead.phone || "-"}
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-gray-100 bg-[#fafafa] p-4">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-gray-400 font-semibold">
+              Email
+            </p>
+            <p className="mt-2 text-sm font-semibold text-gray-900 break-words">
               {liveLead.email || "-"}
-            </span>
-          </p>
-          <p className="flex justify-between gap-3">
-            <span className="text-gray-400">Course</span>
-            <span className="text-gray-800 font-medium text-right break-words max-w-[60%]">
-              {liveLead.course}
-            </span>
-          </p>
-          <p className="flex justify-between gap-3">
-            <span className="text-gray-400">Branch</span>
-            <span className="text-gray-800 font-medium text-right break-words max-w-[60%]">
-              {liveLead.branch}
-            </span>
-          </p>
-          <p className="flex justify-between gap-3">
-            <span className="text-gray-400">Location</span>
-            <span className="text-gray-800 font-medium text-right break-words max-w-[60%]">
-              {liveLead.village}
-            </span>
-          </p>
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-gray-100 bg-[#fafafa] p-4">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-gray-400 font-semibold">
+              Course
+            </p>
+            <p className="mt-2 text-sm font-semibold text-gray-900 break-words">
+              {liveLead.course || "-"}
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-gray-100 bg-[#fafafa] p-4">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-gray-400 font-semibold">
+              Branch
+            </p>
+            <p className="mt-2 text-sm font-semibold text-gray-900 break-words">
+              {liveLead.branch || "-"}
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-gray-100 bg-[#fafafa] p-4 sm:col-span-2">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-gray-400 font-semibold">
+              Location
+            </p>
+            <p className="mt-2 text-sm font-semibold text-gray-900 break-words">
+              {liveLead.village || "-"}
+            </p>
+          </div>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-100 pt-5 space-y-5">
+        <div className="border-t border-dashed border-gray-200 pt-6 space-y-6">
 
           {/* Status Dropdown */}
           <div>
-            <label className="text-[11px] text-gray-400 font-medium tracking-wide mb-1">Update Status</label>
+            <label className="text-[11px] uppercase tracking-[0.18em] text-gray-400 font-semibold mb-2 block">
+              Lead Status
+            </label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm bg-white/80 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 transition-all duration-200"
+              className="w-full rounded-2xl border border-gray-200 bg-[#fcfcfc] px-4 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all duration-200 focus:border-[#800000]/30 focus:outline-none focus:ring-4 focus:ring-[#800000]/10"
             >
               {STATUS_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -174,7 +203,9 @@ function LeadDetails({ lead }) {
 
           {/* Schedule */}
           <div>
-            <label className="text-[11px] text-gray-400 font-medium tracking-wide mb-1">Schedule Follow Up</label>
+            <label className="text-[11px] uppercase tracking-[0.18em] text-gray-400 font-semibold mb-2 block">
+              Schedule Follow Up
+            </label>
             <DatePicker
               selected={scheduleDate}
               onChange={(date) => setScheduleDate(date)}
@@ -182,18 +213,20 @@ function LeadDetails({ lead }) {
               timeIntervals={15}
               dateFormat="Pp"
               placeholderText="Select date & time"
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm bg-white/80 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 transition-all duration-200 truncate"
+              className="w-full rounded-2xl border border-gray-200 bg-[#fcfcfc] px-4 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all duration-200 focus:border-[#800000]/30 focus:outline-none focus:ring-4 focus:ring-[#800000]/10 truncate"
             />
           </div>
 
           {/* Notes */}
           <div>
-            <label className="text-[11px] text-gray-400 font-medium tracking-wide mb-1">Add Note</label>
+            <label className="text-[11px] uppercase tracking-[0.18em] text-gray-400 font-semibold mb-2 block">
+              Follow Up Notes
+            </label>
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
               placeholder="Type update or follow-up note..."
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm bg-white/80 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 transition-all duration-200 resize-none break-words"
+              className="w-full rounded-2xl border border-gray-200 bg-[#fcfcfc] px-4 py-3 text-sm text-gray-700 shadow-sm transition-all duration-200 focus:border-[#800000]/30 focus:outline-none focus:ring-4 focus:ring-[#800000]/10 resize-none break-words"
               rows={3}
             />
           </div>
@@ -202,9 +235,9 @@ function LeadDetails({ lead }) {
           <button
             onClick={handleUpdate}
             disabled={loading}
-            className="w-full bg-gray-900 text-white py-2.5 rounded-xl text-sm font-semibold tracking-wide shadow-md hover:bg-gray-800 hover:shadow-lg transition-all duration-200"
+            className="w-full rounded-2xl bg-gradient-to-r from-[#091224] to-[#111827] py-3.5 text-sm font-semibold tracking-wide text-white shadow-[0_10px_30px_rgba(17,24,39,0.2)] transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[0_16px_40px_rgba(17,24,39,0.28)]"
           >
-            {loading ? "Updating..." : "Save Changes"}
+            {loading ? "Updating Lead..." : "Save Lead Updates"}
           </button>
 
         
