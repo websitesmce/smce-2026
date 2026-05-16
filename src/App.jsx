@@ -62,6 +62,7 @@ import AdmissionForm from './pages/AdmissionForm';
 import Login from './pages/AdsLeads/pages/Login';
 import Dashboard from './pages/AdsLeads/pages/Dashboard';
 import StudentPortal from './pages/StudentPortal';
+import FlaotingButton from './components/FlaotingButton';
 
 function ProtectedRoute({ user, children }) {
   if (!user) {
@@ -81,6 +82,9 @@ function LayoutWrapper({ children }) {
     <>
       {!shouldHideNavbar && <Navbar />}
       {children}
+      {!shouldHideNavbar && location.pathname !== "/admission-form" && (
+        <FlaotingButton />
+      )}
     </>
   );
 }

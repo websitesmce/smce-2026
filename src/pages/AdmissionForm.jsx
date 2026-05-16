@@ -2,6 +2,7 @@ import { useState } from "react";
 import { db } from "../services/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import logo from "../assets/logo/logo.png"
+import { Link } from "react-router-dom";
 
 const villages = [
   "Guntur",
@@ -70,7 +71,7 @@ export default function AdmissionForm() {
   };
 
   return (
-    <div className="mt-[90px] px-6 bg-[#800000]/5 min-h-screen py-10">
+    <div className="mt-[90px] px-6 bg-[#800000]/5 min-h-screen py-10 pb-20">
 
       {/* Logo */}
       <div className="flex justify-center mb-6">
@@ -216,6 +217,44 @@ export default function AdmissionForm() {
           </div>
         </form>
       )}
+
+      {/* Contact Information */}
+      <div className="max-w-4xl mx-auto mt-12 rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+        <h3 className="mb-6 text-2xl font-semibold text-gray-900">
+          Contact
+        </h3>
+
+        <div className="space-y-3 text-gray-700">
+          <p className="text-lg">
+            <span className="font-semibold text-gray-900">Email:</span>{" "}
+            admissions@smce.edu.in
+          </p>
+
+          <p className="text-lg">
+            <span className="font-semibold text-gray-900">Phone:</span>{" "}
+            +91-99887-77665
+          </p>
+
+          <p className="text-lg">
+            <span className="font-semibold text-gray-900">Hours:</span>{" "}
+            Mon-Fri, 9AM - 5PM
+          </p>
+
+          <p className="text-lg">
+            <span className="font-semibold text-gray-900">Location:</span>{" "}
+            Admissions Office, SMCE Campus
+          </p>
+        </div>
+
+        <div className="mt-8">
+          <Link
+            to="/admission-procedure"
+            className="inline-flex items-center rounded-full bg-[#800000] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:opacity-90"
+          >
+            More Admission Information
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

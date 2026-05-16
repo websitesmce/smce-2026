@@ -101,7 +101,7 @@ export default function AdmissionProcedure() {
       </div>
 
       {/* Guidance Section */}
-      <div className="mt-24">
+      {/* <div className="mt-24">
         <h3 className="text-3xl font-bold mb-6 text-[#800000] text-center">
           Explore the Right Path for You
         </h3>
@@ -142,7 +142,7 @@ export default function AdmissionProcedure() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
