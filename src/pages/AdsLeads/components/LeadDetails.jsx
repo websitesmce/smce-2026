@@ -93,7 +93,6 @@ function LeadDetails({ lead }) {
       setNote("");
       // Reset fields after submit
       setScheduleDate(null);
-      setStatus("new");
     } catch (err) {
       console.error(err);
       alert("Update failed");
@@ -133,6 +132,24 @@ function LeadDetails({ lead }) {
 
         {/* Info */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <div className="rounded-2xl border border-[#800000]/10 bg-gradient-to-br from-[#800000]/[0.03] to-white p-4 sm:col-span-2 shadow-sm">
+            <div className="flex items-center justify-between gap-3 flex-wrap">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.14em] text-gray-400 font-semibold">
+                  Lead ID
+                </p>
+
+                <p className="mt-2 text-lg font-bold tracking-wide text-[#800000] break-all">
+                  {liveLead.userId || "-"}
+                </p>
+              </div>
+
+              <div className="rounded-full bg-[#800000]/10 px-3 py-1 text-[11px] font-semibold text-[#800000] border border-[#800000]/10">
+                CRM Reference
+              </div>
+            </div>
+          </div>
 
           <div className="rounded-2xl border border-gray-100 bg-[#fafafa] p-4">
             <p className="text-[11px] uppercase tracking-[0.14em] text-gray-400 font-semibold">
