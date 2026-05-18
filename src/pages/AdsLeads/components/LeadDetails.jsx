@@ -23,17 +23,120 @@ function InfoBlock({ label, value }) {
 
 // ── LeadDetails ───────────────────────────────────────────────────────────────
 
-function LeadDetails({ lead }) {
+// ── Confirmation Modal ────────────────────────────────────────────────────────
+
+function ConfirmModal({ lead, status, scheduleDate, note, onConfirm, onCancel }) {
+  const prevStatus = lead.status || "new";
+  const statusChanged = prevStatus !== status;
+  const schedChanged =
+    (lead.scheduledAt ? new Date(lead.scheduledAt?.seconds * 1000 || lead.scheduledAt).toISOString() : null) !==
+    (scheduleDate ? scheduleDate.toISOString() : null);
+
+  return (
+    <>
+      <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px]" onClick={onCancel} />
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+        <div className="pointer-events-auto w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
+
+          {/* Header */}
+          <div className="px-5 pt-5 pb-4 border-b border-gray-100">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-[#800000]/10 flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4 text-[#800000]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-[15px] font-bold text-gray-900">Confirm Update</h3>
+                <p className="text-xs text-gray-400 mt-0.5 truncate max-w-[200px]">{lead.name || "Unnamed lead"}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Change summary */}
+          <div className="px-5 py-4 space-y-2.5">
+            {statusChanged && (
+              <div className="flex items-center gap-2.5 rounded-xl bg-gray-50 border border-gray-100 px-3.5 py-2.5">
+                <svg className="w-3.5 h-3.5 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
+                </svg>
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="text-gray-500">Status:</span>
+                  <span className="font-semibold text-gray-700">{getStatus(prevStatus).label}</span>
+                  <svg className="w-3 h-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                  <span className="font-bold text-[#800000]">{getStatus(status).label}</span>
+                </div>
+              </div>
+            )}
+
+            {schedChanged && scheduleDate && (
+              <div className="flex items-center gap-2.5 rounded-xl bg-amber-50 border border-amber-100 px-3.5 py-2.5">
+                <svg className="w-3.5 h-3.5 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div className="text-xs">
+                  <span className="text-amber-600">Follow-up: </span>
+                  <span className="font-semibold text-amber-800">
+                    {scheduleDate.toLocaleDateString("en-IN", { day: "numeric", month: "short" })} ·{" "}
+                    {scheduleDate.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {note.trim() && (
+              <div className="rounded-xl bg-blue-50 border border-blue-100 px-3.5 py-2.5">
+                <p className="text-[10px] font-semibold text-blue-500 uppercase tracking-widest mb-1">Note</p>
+                <p className="text-xs text-blue-900 leading-relaxed line-clamp-3">{note.trim()}</p>
+              </div>
+            )}
+
+            {!statusChanged && !schedChanged && !note.trim() && (
+              <p className="text-xs text-gray-400 text-center py-2">No visible changes — update will be saved as-is.</p>
+            )}
+          </div>
+
+          {/* Actions */}
+          <div className="px-5 pb-5 flex gap-2.5">
+            <button
+              onClick={onCancel}
+              className="flex-1 h-10 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={onConfirm}
+              className="flex-1 h-10 rounded-xl bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold transition shadow-sm"
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ── LeadDetails ───────────────────────────────────────────────────────────────
+
+function LeadDetails({ lead, onSave }) {
   const [status, setStatus] = useState(lead?.status || "new");
   const [scheduleDate, setScheduleDate] = useState(null);
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
+  const [saveError, setSaveError] = useState("");
+  const [saveSuccess, setSaveSuccess] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   // Full reset when a different lead is selected
   useEffect(() => {
     if (!lead) return;
     setStatus(lead.status || "new");
     setNote("");
+    setSaveError("");
+    setSaveSuccess(false);
     setScheduleDate(tsToDate(lead.scheduledAt));
   }, [lead?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -49,9 +152,11 @@ function LeadDetails({ lead }) {
   const createdAt = tsToDate(lead.createdAt);
 
   const handleUpdate = async () => {
-    try {
-      setLoading(true);
+    setSaveError("");
+    setSaveSuccess(false);
+    setLoading(true);
 
+    try {
       // Build a meaningful activity label
       let text = "Lead updated";
       if (note.trim()) {
@@ -72,23 +177,45 @@ function LeadDetails({ lead }) {
         createdAt: new Date(),
       };
 
-      // ── Core fix: reset taskStatus when scheduledAt changes to a new date ──
-      // This makes the Done / Missed buttons reappear for every rescheduled call.
+      // Capture state snapshots for undo/redo BEFORE writing
+      const prevFields = {
+        status: lead.status || "new",
+        scheduledAt: lead.scheduledAt ?? null,
+        taskStatus: lead.taskStatus ?? null,
+      };
+
       const prevMs = tsToMs(lead.scheduledAt);
-      const newMs = scheduleDate?.getTime() ?? null;
+      const newMs  = scheduleDate?.getTime() ?? null;
       const scheduledChanged = prevMs !== newMs;
 
-      await updateDoc(doc(db, "admissions", lead.id), {
+      const newFields = {
         status,
         scheduledAt: scheduleDate ?? null,
-        activities: arrayUnion(activity),
         ...(scheduledChanged && scheduleDate ? { taskStatus: null } : {}),
+      };
+
+      await updateDoc(doc(db, "admissions", lead.id), {
+        ...newFields,
+        activities: arrayUnion(activity),
+      });
+
+      // Push to history AFTER a successful write
+      onSave?.({
+        id: Date.now(),
+        leadId: lead.id,
+        leadName: lead.name || "Unnamed",
+        description: text,
+        prevFields,
+        newFields,
+        timestamp: new Date(),
       });
 
       setNote("");
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 2500);
     } catch (err) {
       console.error(err);
-      alert("Update failed. Please try again.");
+      setSaveError("Update failed. Check your connection and try again.");
     } finally {
       setLoading(false);
     }
@@ -237,15 +364,47 @@ function LeadDetails({ lead }) {
             />
           </div>
 
+          {/* Error banner */}
+          {saveError && (
+            <div className="flex items-center gap-2.5 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5">
+              <svg className="w-4 h-4 text-red-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              </svg>
+              <p className="text-xs text-red-700 font-medium">{saveError}</p>
+            </div>
+          )}
+
+          {/* Success banner */}
+          {saveSuccess && (
+            <div className="flex items-center gap-2.5 rounded-xl border border-green-200 bg-green-50 px-3.5 py-2.5">
+              <svg className="w-4 h-4 text-green-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-xs text-green-700 font-medium">Saved — change can be undone from history.</p>
+            </div>
+          )}
+
           <button
-            onClick={handleUpdate}
+            onClick={() => setShowConfirm(true)}
             disabled={loading}
             className="w-full rounded-xl bg-gray-900 hover:bg-gray-800 active:bg-gray-700 text-white py-3 text-sm font-semibold tracking-wide shadow-sm hover:shadow-md transition-all duration-200 disabled:opacity-60"
           >
-            {loading ? "Saving..." : "Save Update"}
+            {loading ? "Saving…" : "Save Update"}
           </button>
         </div>
       </div>
+
+      {/* Confirm modal */}
+      {showConfirm && (
+        <ConfirmModal
+          lead={lead}
+          status={status}
+          scheduleDate={scheduleDate}
+          note={note}
+          onConfirm={() => { setShowConfirm(false); handleUpdate(); }}
+          onCancel={() => setShowConfirm(false)}
+        />
+      )}
     </div>
   );
 }

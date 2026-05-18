@@ -48,6 +48,7 @@ import IQAC from './pages/StatutoryBody/IQAC';
 import CommitteesPage from './pages/StatutoryBody/committees';
 import CommitteeDetails from './pages/StatutoryBody/CommitteeDetails';
 import LoaderSMCE from './components/navbar/LoaderSMCE';
+import WhatsAppButton from './components/Home/hero/WhatsApp';
 import AQAR2023_24 from './pages/NAAC/AQAR2023_24';
 import AQAR2022_23 from './pages/NAAC/AQAR2022_23';
 import ICT from './pages/NAAC/ICT';
@@ -64,9 +65,29 @@ import Dashboard from './pages/AdsLeads/pages/Dashboard';
 import StudentPortal from './pages/StudentPortal';
 import FlaotingButton from './components/FlaotingButton';
 
-function ProtectedRoute({ user, children }) {
+// Resets scroll position to the top on every route change.
+// Must live inside <BrowserRouter> so useLocation works.
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
+  return null;
+}
+
+function ProtectedRoute({ user, authLoading, children }) {
+  if (authLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-[#F8FAFC]">
+        <div className="text-center space-y-3">
+          <div className="w-8 h-8 border-2 border-[#800000] border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-sm text-gray-400 font-medium">Loading...</p>
+        </div>
+      </div>
+    );
+  }
   if (!user) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
   return children;
 }
@@ -74,17 +95,18 @@ function ProtectedRoute({ user, children }) {
 function LayoutWrapper({ children }) {
   const location = useLocation();
 
-  const shouldHideNavbar =
+  const isDashboard =
     location.pathname === "/login" ||
     location.pathname.startsWith("/dashboard");
 
   return (
     <>
-      {!shouldHideNavbar && <Navbar />}
+      {!isDashboard && <Navbar />}
       {children}
-      {!shouldHideNavbar && location.pathname !== "/admission-form" && (
+      {!isDashboard && location.pathname !== "/admission-form" && (
         <FlaotingButton />
       )}
+      {!isDashboard && <WhatsAppButton />}
     </>
   );
 }
@@ -158,6 +180,7 @@ function App() {
         <LoaderSMCE />
       ) : (
         <BrowserRouter>
+          <ScrollToTop />
           <LayoutWrapper>
             <Routes>
             <Route path="/" element={<HomePage />} />
@@ -207,13 +230,13 @@ function App() {
             <Route path="/admission-form" element={<AdmissionForm />} />
             <Route path="/login" element={<Login />} />
             <Route path="/student-portal" element={<StudentPortal />} />
-            <Route 
-              path="/dashboard" 
+            <Route
+              path="/dashboard"
               element={
-                <ProtectedRoute user={user}>
+                <ProtectedRoute user={user} authLoading={authLoading}>
                   <Dashboard />
                 </ProtectedRoute>
-              } 
+              }
             />
   
             </Routes>

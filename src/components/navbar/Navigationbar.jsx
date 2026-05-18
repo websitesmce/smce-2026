@@ -99,7 +99,7 @@ const linksData = [
     ],
     contact: {
       email: "admissions@smce.edu.in",
-      phone: "+91-99887-77665",
+      phone: "+91-90004-47117",
       hours: "Mon-Fri, 9AM - 5PM",
       location: "Admissions Office, SMCE Campus",
     },

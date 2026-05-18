@@ -1,7 +1,7 @@
 import React from 'react';
 
 const whatsappLink =
-  'https://wa.me/919032727017?text=Hey%20there!%20I%20have%20a%20question%20regarding%20admissions.';
+  'https://wa.me/919000447117?text=Hey%20there!%20I%20have%20a%20question%20regarding%20admissions.';
 
 function WhatsApp() {
   return (

@@ -16,57 +16,69 @@ const INTERVAL_TIME = 6500; // Time between slide changes
 
 const slides = [
   {
-    // 1: Girl holding a book -> Focus on individual growth and career readiness.
     text: [
-      { text: 'We empower every student to ', highlight: false },
-      { text: 'excel professionally.', highlight: true },
+      { text: 'Four years that ', highlight: false },
+      { text: 'shape who you become.', highlight: true },
     ],
     image: Image1,
   },
   {
-    // 2: Student in classroom -> Focus on learning environment and clarity.
     text: [
-      { text: 'Spacious classrooms ensure ', highlight: false },
-      { text: 'focused learning with ease.', highlight: true },
+      { text: 'Where curious minds find ', highlight: false },
+      { text: 'their calling.', highlight: true },
     ],
     image: Image2,
   },
   {
-    // 3: Student in computer lab -> Focus on technology and modern skills.
     text: [
-      { text: 'Gain future-ready skills in our ', highlight: false },
-      { text: 'advanced computer labs.', highlight: true },
+      { text: 'Build, create, and ', highlight: false },
+      { text: 'solve real problems.', highlight: true },
     ],
     image: Image3,
   },
   {
-    // 4: Well-equipped Electronic labs -> Focus on practical exposure and industry tools.
     text: [
-      { text: 'Learn hands-on with ', highlight: false },
-      { text: 'industry-standard equipment.', highlight: true },
+      { text: 'Hands-on learning in ', highlight: false },
+      { text: 'world-class labs.', highlight: true },
     ],
     image: Image4,
   },
   {
-    // 5: Drone shot of campus -> Focus on campus life and a holistic experience.
     text: [
-      { text: 'Experience a vibrant and ', highlight: false },
-      { text: 'green campus life.', highlight: true },
+      { text: 'A campus alive with ', highlight: false },
+      { text: 'ideas and energy.', highlight: true },
     ],
     image: Image5,
   },
-  
 ];
 
-// Subtly smaller font size clamping for dynamic text (remains the same)
-const getDynamicTextFontSize = () => {
-  const width = window.innerWidth;
-  if (width < 768) return 'clamp(1.0rem, 4.5vw, 1.6rem)'; // Slightly increased
-  if (width >= 768 && width < 1024) return 'clamp(1.2rem, 2.5vw, 1.8rem)'; // Slightly increased
+// ── Cached viewport width — reads window once on mount, updates on resize ────
+// Replaces all direct window.innerWidth calls in render (which force reflow).
+function useWindowWidth() {
+  const [vw, setVw] = React.useState(
+    () => (typeof window !== 'undefined' ? window.innerWidth : 1280)
+  );
+  React.useEffect(() => {
+    let raf;
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setVw(window.innerWidth));
+    };
+    window.addEventListener('resize', onResize, { passive: true });
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', onResize); };
+  }, []);
+  return vw;
+}
+
+// Takes width as a parameter — pure function, no window access
+const getDynamicTextFontSize = (width) => {
+  if (width < 768)  return 'clamp(1.0rem, 4.5vw, 1.6rem)';
+  if (width < 1024) return 'clamp(1.2rem, 2.5vw, 1.8rem)';
   return 'clamp(1.3rem, 1.8vw, 2.0rem)';
 };
 
 function Hero() {
+  const vw = useWindowWidth();   // single cached read — no reflow on render
   const [index, setIndex] = useState(0);
   const collegeNameRef = useRef(null);
   const ctaRef = useRef(null); 
@@ -177,13 +189,12 @@ function Hero() {
   }, [nextSlide]); 
 
   // Dynamic font size for the slide text (updated with slight increase)
-  const dynamicSlideTextFontSize = getDynamicTextFontSize(); 
-  
-  // Custom font size for the main college name block
+  const dynamicSlideTextFontSize = getDynamicTextFontSize(vw);
+
+  // Uses cached vw — no window.innerWidth in render
   const getCollegeNameFontSize = (defaultSize, mobileMultiplier, tabletMultiplier, desktopMultiplier) => {
-    const width = window.innerWidth;
-    if (width < 768) return `clamp(${defaultSize * mobileMultiplier}rem, 6vw, ${defaultSize * mobileMultiplier}rem)`; 
-    if (width >= 768 && width < 1024) return `clamp(${defaultSize * tabletMultiplier}rem, 4.5vw, ${defaultSize * tabletMultiplier}rem)`; 
+    if (vw < 768)  return `clamp(${defaultSize * mobileMultiplier}rem, 6vw, ${defaultSize * mobileMultiplier}rem)`;
+    if (vw < 1024) return `clamp(${defaultSize * tabletMultiplier}rem, 4.5vw, ${defaultSize * tabletMultiplier}rem)`;
     return `clamp(${defaultSize * desktopMultiplier}rem, 3.2vw, ${defaultSize * desktopMultiplier}rem)`;
   };
 
@@ -197,11 +208,7 @@ function Hero() {
       
       {/* --- NEW IMAGE WRAPPER (The Clipping Container) --- */}
       {/* This element controls the visible area of the image and has overflow-hidden */}
-      <div 
-        className="image-wrapper absolute top-0 left-0 w-full z-0 overflow-hidden"
-        // Mobile height: 80vh, Desktop/Tablet height: full (100% of h-screen)
-        style={{ height: window.innerWidth < 768 ? '80vh' : '100%' }}
-      >
+      <div className="image-wrapper absolute top-0 left-0 w-full z-0 overflow-hidden h-[80vh] md:h-full">
         {/* Background Image Slideshow */}
         {slides.map((slide, i) => (
           <img
@@ -316,17 +323,14 @@ function Hero() {
           <div className="flex flex-col items-start"> 
               <div
                 ref={textRevealBoxRef}
-                className="p-4 md:p-6 shadow-2xl text-left" 
+                className="p-4 md:p-6 shadow-2xl text-left min-h-[80px] md:min-h-[100px]"
                 style={{
                   color: 'black',
                   overflow: 'hidden',
-                  clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)', 
-                  maxWidth: '500px', 
+                  clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+                  maxWidth: '500px',
                   backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                  // Fixed dimensions for smooth animation
-                  minWidth: '350px', 
-                  // MOBILE MIN HEIGHT ADJUSTMENT: Reduced for mobile/smaller screens
-                  minHeight: window.innerWidth < 768 ? '80px' : '100px', 
+                  minWidth: '350px',
                 }}
               >
                 <div

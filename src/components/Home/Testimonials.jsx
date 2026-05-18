@@ -1,134 +1,223 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ── Data ──────────────────────────────────────────────────────────────────────
+
 const testimonials = [
   {
     name: "Ananya Rao",
-    role: "Alumni, Software Engineer at Infosys",
-    tag: "student",
+    role: "B.Tech CSE Alumni · Software Engineer at Infosys",
+    tag: "Student",
     quote:
-      "SMCE gave me the foundation and confidence to thrive in the tech world. The industry connect and mentorship made all the difference.",
-    image: "/assets/testimonials/ananya.jpg",
+      "SMCE gave me the foundation and confidence to thrive in the tech world. The industry connections, mentorship, and placement cell made all the difference in my career.",
+    accent: {
+      border: "border-l-blue-500",
+      tag: "bg-blue-50 text-blue-700 border border-blue-200",
+      avatar: "from-blue-500 to-blue-700",
+      quoteMark: "text-blue-200",
+    },
   },
   {
     name: "Rahul Dev",
-    role: "Parent of CSE Graduate",
-    tag: "parent",
+    role: "Parent · Father of CSE 2023 Graduate",
+    tag: "Parent",
     quote:
-      "I'm grateful for the holistic development my child received. The college's commitment to quality is commendable.",
-    image: "/assets/testimonials/rahul.jpg",
+      "I'm deeply grateful for the holistic development SMCE provided my child. From academics to placements, the college's commitment to quality is absolutely commendable.",
+    accent: {
+      border: "border-l-emerald-500",
+      tag: "bg-emerald-50 text-emerald-700 border border-emerald-200",
+      avatar: "from-emerald-500 to-emerald-700",
+      quoteMark: "text-emerald-200",
+    },
   },
   {
     name: "Sravani Iyer",
-    role: "Staff, Training & Placement",
-    tag: "staff",
+    role: "Staff · Head of Training & Placement Cell",
+    tag: "Faculty",
     quote:
-      "We ensure every student gets the best possible career guidance. The 98% placement rate reflects our dedication.",
-    image: "/assets/testimonials/sravani.jpg",
+      "Every student deserves a fair shot at their dream career. Our 98% placement rate is not a number — it reflects years of hard work, industry partnerships, and genuine student support.",
+    accent: {
+      border: "border-l-violet-500",
+      tag: "bg-violet-50 text-violet-700 border border-violet-200",
+      avatar: "from-violet-500 to-violet-700",
+      quoteMark: "text-violet-200",
+    },
   },
   {
     name: "Manoj B",
-    role: "Researcher, IEEE Journal Contributor",
-    tag: "journals",
+    role: "Researcher · IEEE International Journal Contributor",
+    tag: "Research",
     quote:
-      "The research opportunities and support from SMCE helped me publish my first international paper.",
-    image: "/assets/testimonials/manoj.jpg",
+      "The research environment at SMCE is exceptional. The faculty support and lab access helped me publish my first international paper — an achievement I'll always be proud of.",
+    accent: {
+      border: "border-l-amber-500",
+      tag: "bg-amber-50 text-amber-700 border border-amber-200",
+      avatar: "from-amber-500 to-amber-600",
+      quoteMark: "text-amber-200",
+    },
   },
 ];
 
+// ── Sub-components ────────────────────────────────────────────────────────────
+
+function StarRating({ count = 5 }) {
+  return (
+    <div className="flex gap-0.5">
+      {Array.from({ length: count }).map((_, i) => (
+        <svg key={i} className="w-4 h-4 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
+function Avatar({ name, gradient }) {
+  const initials = name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
+  return (
+    <div
+      className={`w-10 h-10 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-white text-sm font-bold shrink-0 shadow-sm`}
+    >
+      {initials}
+    </div>
+  );
+}
+
+function TestimonialCard({ t }) {
+  return (
+    <div
+      className={`h-full flex flex-col bg-white rounded-2xl border border-gray-100 border-l-4 ${t.accent.border} shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 p-6`}
+    >
+      {/* Stars + Tag */}
+      <div className="flex items-center justify-between mb-4">
+        <StarRating />
+        <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${t.accent.tag}`}>
+          {t.tag}
+        </span>
+      </div>
+
+      {/* Opening quote mark */}
+      <span
+        className={`text-5xl font-serif leading-none ${t.accent.quoteMark} block -mb-1 select-none`}
+        aria-hidden="true"
+      >
+        &ldquo;
+      </span>
+
+      {/* Quote text — grows to fill card height */}
+      <blockquote className="flex-1 mb-5">
+        <p className="text-gray-700 text-[15px] leading-relaxed">{t.quote}</p>
+      </blockquote>
+
+      {/* Person row */}
+      <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+        <Avatar name={t.name} gradient={t.accent.avatar} />
+        <div className="min-w-0">
+          <p className="text-sm font-bold text-gray-900 truncate">{t.name}</p>
+          <p className="text-xs text-gray-400 mt-0.5 truncate">{t.role}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Main section ──────────────────────────────────────────────────────────────
+
 export default function Testimonials() {
   const sectionRef = useRef(null);
-  const [active, setActive] = useState(0);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        ".testimonial-card",
+        ".test-heading",
+        { opacity: 0, y: 30 },
         {
-          opacity: 0,
-          y: 60,
-        },
+          opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+          scrollTrigger: { trigger: ".test-heading", start: "top 88%" },
+        }
+      );
+      gsap.fromTo(
+        ".test-card",
+        { opacity: 0, y: 36 },
         {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-          },
+          opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out",
+          scrollTrigger: { trigger: ".test-grid", start: "top 84%" },
         }
       );
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActive((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-
   return (
-    <section
-      ref={sectionRef}
-      className="bg-white py-24 px-6 sm:px-12 md:px-20 overflow-hidden"
-    >
-      <div className="text-center mb-16">
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-3">
-          Testimonials & Alumni Stories
-        </h2>
-        <p className="text-gray-500 text-sm sm:text-base max-w-2xl mx-auto">
-          Words from our students, parents, and faculty that define SMCE's legacy.
-        </p>
-      </div>
+    <section ref={sectionRef} className="bg-[#f8f9fb] py-14 sm:py-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16">
 
-      <div className="relative max-w-4xl mx-auto">
-        <div className="relative h-[440px] sm:h-[460px]">
-          {testimonials.map((t, idx) => (
-            <div
-              key={idx}
-              className={`testimonial-card absolute top-0 left-0 w-full h-full transition-all duration-700 ease-[cubic-bezier(0.77,0,0.175,1)] transform rounded-3xl shadow bg-white border border-gray-100 p-8 flex flex-col justify-between text-center ${
-                idx === active ? "z-20 opacity-100" : "z-10 opacity-0"
-              }`}
-            >
-              <img
-              loading="lazy"
-                src={t.image}
-                alt={t.name}
-                className="w-20 h-20 mx-auto rounded-full object-cover shadow mb-4"
-              />
-              <p className="text-gray-700 text-sm sm:text-base italic min-h-[100px]">
-                “{t.quote}”
+        {/* ── Heading ─────────────────────────────────────────────────────── */}
+        <div className="test-heading mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-2 h-2 rounded-full bg-amber-400" />
+              <p className="text-xs font-bold text-[#800000] uppercase tracking-widest">
+                Testimonials &amp; Alumni Stories
               </p>
-              <div className="mt-2">
-                <p className="font-semibold text-gray-800">{t.name}</p>
-                <p className="text-xs text-gray-500">{t.role}</p>
-                <span className="inline-block mt-2 bg-amber-100 text-[#800000] text-[11px] uppercase px-2 py-1 rounded-full font-semibold">
-                  {t.tag}
-                </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-[1.1]">
+              Trusted by Students,<br className="hidden sm:block" />
+              Parents &amp; Faculty
+            </h2>
+            <p className="mt-3 text-sm text-gray-500 leading-relaxed max-w-md">
+              Real voices from our community — students who landed their dream jobs,
+              parents who saw the difference, and faculty who make it happen.
+            </p>
+          </div>
+
+          {/* Rating widget */}
+          <div className="shrink-0 flex items-center gap-3 bg-white border border-gray-200 rounded-2xl px-5 py-4 shadow-sm self-start md:self-end">
+            <div className="text-center">
+              <p className="text-3xl font-extrabold text-gray-900 leading-none">4.9</p>
+              <div className="flex justify-center mt-1.5">
+                <StarRating />
               </div>
+            </div>
+            <div className="border-l border-gray-200 pl-4">
+              <p className="text-sm font-bold text-gray-900">Excellent</p>
+              <p className="text-xs text-gray-400 mt-0.5">Based on 500+ alumni reviews</p>
+            </div>
+          </div>
+        </div>
+
+        {/* ── 2×2 card grid ─────────────────────────────────────────────── */}
+        <div className="test-grid grid grid-cols-1 md:grid-cols-2 gap-5">
+          {testimonials.map((t) => (
+            <div key={t.name} className="test-card h-full">
+              <TestimonialCard t={t} />
             </div>
           ))}
         </div>
 
-        {/* Dot Pagination */}
-        <div className="flex justify-center gap-3 mt-8">
-          {testimonials.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActive(idx)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                active === idx ? "bg-[#800000] scale-110" : "bg-gray-300"
-              }`}
-            ></button>
-          ))}
+        {/* ── Bottom strip ──────────────────────────────────────────────── */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-gray-200">
+          <p className="text-sm text-gray-500 text-center sm:text-left">
+            Join <span className="font-bold text-gray-800">5,000+ alumni</span> who built their careers at SMCE.
+          </p>
+          <a
+            href="/admission-form"
+            className="inline-flex items-center gap-2 bg-[#800000] hover:bg-[#6a0000] text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-all duration-200 shadow hover:shadow-md whitespace-nowrap"
+          >
+            Start Your Journey
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>

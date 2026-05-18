@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useRef, useMemo, useState } from "react";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../services/firebase";
 import { getStatus } from "../utils/statusConfig";
 
 // ── Config ────────────────────────────────────────────────────────────────────
@@ -36,6 +38,8 @@ function relativeTime(ts) {
 
 function ActivityPanel({ lead }) {
   const bottomRef = useRef(null);
+  const [confirmIdx, setConfirmIdx] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   const sorted = useMemo(() => {
     if (!Array.isArray(lead?.activities)) return [];
@@ -46,6 +50,25 @@ function ActivityPanel({ lead }) {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [sorted.length]);
+
+  // Clear confirm state when lead changes
+  useEffect(() => {
+    setConfirmIdx(null);
+  }, [lead?.id]);
+
+  const handleDelete = async (sortedIdx) => {
+    setDeleting(true);
+    try {
+      // Filter out the entry at sortedIdx and write the full array back
+      const updated = sorted.filter((_, i) => i !== sortedIdx);
+      await updateDoc(doc(db, "admissions", lead.id), { activities: updated });
+      setConfirmIdx(null);
+    } catch (err) {
+      console.error("Delete failed:", err);
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   if (!lead) return null;
 
@@ -84,17 +107,22 @@ function ActivityPanel({ lead }) {
         ) : (
           <div className="space-y-2.5">
             {sorted.map((act, idx) => {
-              const isLatest = idx === sorted.length - 1;
-              const typeCfg = TYPE_CONFIG[act.type] ?? { label: "Activity", cls: "bg-gray-100 text-gray-600 border-gray-200" };
-              const fromSc = act.from ? getStatus(act.from) : null;
-              const toSc   = act.to   ? getStatus(act.to)   : null;
-              const changed = act.type === "status" && act.from !== act.to;
+              const isLatest  = idx === sorted.length - 1;
+              const isConfirm = confirmIdx === idx;
+              const typeCfg   = TYPE_CONFIG[act.type] ?? { label: "Activity", cls: "bg-gray-100 text-gray-600 border-gray-200" };
+              const fromSc    = act.from ? getStatus(act.from) : null;
+              const toSc      = act.to   ? getStatus(act.to)   : null;
+              const changed   = act.type === "status" && act.from !== act.to;
 
               return (
                 <div
                   key={idx}
-                  className={`rounded-xl border bg-white p-4 shadow-sm transition-shadow hover:shadow-md ${
-                    isLatest ? "border-[#800000]/20 ring-1 ring-[#800000]/10" : "border-gray-200"
+                  className={`group rounded-xl border bg-white p-4 shadow-sm transition-all ${
+                    isConfirm
+                      ? "border-red-200 ring-1 ring-red-100"
+                      : isLatest
+                      ? "border-[#800000]/20 ring-1 ring-[#800000]/10 hover:shadow-md"
+                      : "border-gray-200 hover:shadow-md"
                   }`}
                 >
                   {/* Top row */}
@@ -121,22 +149,60 @@ function ActivityPanel({ lead }) {
                       )}
                     </div>
 
-                    {/* Timestamp + Latest badge */}
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      {isLatest && (
+                    {/* Right: timestamp + delete button */}
+                    <div className="flex items-center gap-2 shrink-0">
+                      {isLatest && !isConfirm && (
                         <span className="text-[9px] font-bold uppercase tracking-widest text-[#800000] bg-[#800000]/10 px-2 py-0.5 rounded-full border border-[#800000]/10">
                           Latest
                         </span>
                       )}
                       <span className="text-[11px] text-gray-400 font-medium">{relativeTime(act.createdAt)}</span>
+
+                      {/* X button — visible on hover or when confirming */}
+                      {!isConfirm && (
+                        <button
+                          onClick={() => setConfirmIdx(idx)}
+                          title="Delete this entry"
+                          className="opacity-0 group-hover:opacity-100 w-5 h-5 flex items-center justify-center rounded-md text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all"
+                        >
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      )}
                     </div>
                   </div>
 
                   {/* Activity text */}
-                  {act.text && (
+                  {act.text && !isConfirm && (
                     <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 border border-gray-100 rounded-lg px-3 py-2">
                       {act.text}
                     </p>
+                  )}
+
+                  {/* Inline delete confirmation */}
+                  {isConfirm && (
+                    <div className="mt-1">
+                      <p className="text-xs text-red-600 font-medium mb-2.5">
+                        Delete this activity entry? This can't be undone.
+                      </p>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleDelete(idx)}
+                          disabled={deleting}
+                          className="flex-1 h-7 rounded-lg bg-red-500 hover:bg-red-600 text-white text-[11px] font-semibold transition disabled:opacity-60"
+                        >
+                          {deleting ? "Deleting…" : "Yes, Delete"}
+                        </button>
+                        <button
+                          onClick={() => setConfirmIdx(null)}
+                          disabled={deleting}
+                          className="px-3 h-7 rounded-lg bg-gray-100 text-gray-600 text-[11px] font-semibold hover:bg-gray-200 transition"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
                   )}
                 </div>
               );

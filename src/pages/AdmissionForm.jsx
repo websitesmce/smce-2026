@@ -11,28 +11,28 @@ const branchOptions = {
 };
 
 const stats = [
-  { value: "25+", label: "Years of Excellence" },
-  { value: "NAAC", label: "Accredited" },
-  { value: "NBA", label: "Approved Programs" },
-  { value: "5000+", label: "Alumni Network" },
+  { value: "A+",    label: "NAAC Grade"         },
+  { value: "NBA",   label: "Accredited Programs" },
+  { value: "5000+", label: "Alumni Network"      },
+  { value: "25+",   label: "Years of Excellence" },
 ];
 
 const highlights = [
   {
-    title: "Autonomous Institution",
-    desc: "Flexible, industry-aligned curriculum under Acharya Nagarjuna University.",
+    title: "NAAC A+ Grade Institution",
+    desc: "Certified with the highest NAAC grade — a mark of academic quality, governance, and student outcomes.",
   },
   {
-    title: "Strong Placement Record",
-    desc: "Consistent placements with leading MNCs and core engineering companies.",
+    title: "UGC Autonomous Status",
+    desc: "Flexible, industry-aligned curriculum designed under Acharya Nagarjuna University.",
   },
   {
-    title: "Modern Infrastructure",
-    desc: "Smart classrooms, research labs, and high-speed Wi-Fi across campus.",
+    title: "98% Placement Record",
+    desc: "Consistent placements with 200+ recruiting MNCs and core engineering companies.",
   },
   {
-    title: "Experienced Faculty",
-    desc: "PhD-qualified faculty with deep industry and research expertise.",
+    title: "Modern Campus & Faculty",
+    desc: "Smart classrooms, research labs, and PhD-qualified faculty with deep industry expertise.",
   },
 ];
 
@@ -91,8 +91,8 @@ function SuccessState({ userId }) {
       </div>
       <div className="mt-6 pt-6 border-t border-gray-100">
         <p className="text-sm text-gray-500 mb-1">Need immediate help? Call us:</p>
-        <a href="tel:+919988777665" className="text-[#800000] font-bold text-lg hover:underline">
-          +91-99887-77665
+        <a href="tel:+919000447117" className="text-[#800000] font-bold text-lg hover:underline">
+          +91-90004-47117
         </a>
       </div>
     </div>
@@ -163,17 +163,18 @@ export default function AdmissionForm() {
         />
         <div className="relative max-w-5xl mx-auto text-center">
           <img src={logo} alt="SMCE Logo" className="h-20 mx-auto mb-5 drop-shadow-lg" />
-          <div className="inline-block bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm text-white/90 font-medium mb-5">
-            Admissions Open 2026 &mdash; Limited Seats Available
+          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm text-white/90 font-medium mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-300 animate-pulse" />
+            Admissions Open 2026 &mdash; Limited Seats
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-            Your Engineering Career
+            Begin Your Engineering
             <br className="hidden md:block" />
-            <span className="text-yellow-300">Starts Here</span>
+            <span className="text-yellow-300">Journey at SMCE</span>
           </h1>
-          <p className="text-white/70 text-lg max-w-xl mx-auto">
-            Sri Mittapalli College of Engineering &mdash; Autonomous &bull; NAAC
-            Accredited &bull; NBA Approved
+          <p className="text-white/70 text-base max-w-xl mx-auto leading-relaxed">
+            Sri Mittapalli College of Engineering &mdash; Autonomous &bull;{" "}
+            <span className="text-amber-300 font-semibold">NAAC A+ Grade</span> &bull; NBA Accredited
           </p>
         </div>
       </div>
@@ -188,7 +189,9 @@ export default function AdmissionForm() {
                 i < stats.length - 1 ? "border-r border-gray-100" : ""
               }`}
             >
-              <div className="text-2xl font-bold text-[#800000]">{s.value}</div>
+              <div className={`text-2xl font-bold ${i === 0 ? "text-amber-500" : "text-[#800000]"}`}>
+                {s.value}
+              </div>
               <div className="text-xs text-gray-400 mt-1 uppercase tracking-wide">
                 {s.label}
               </div>
@@ -315,10 +318,10 @@ export default function AdmissionForm() {
                   Admission Helpline
                 </p>
                 <a
-                  href="tel:+919988777665"
+                  href="tel:+919000447117"
                   className="text-2xl font-bold text-white hover:underline block"
                 >
-                  +91-99887-77665
+                  +91-90004-47117
                 </a>
                 <p className="text-xs text-white/50 mt-1">
                   Mon&ndash;Sat &bull; 9AM &ndash; 5PM

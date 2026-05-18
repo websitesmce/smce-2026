@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
-import { doc, onSnapshot, collection, query, orderBy } from "firebase/firestore";
+import { doc, onSnapshot, collection, query, orderBy, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../../services/firebase";
 import Navbar from "../components/Navbar";
 import LeadTable from "../components/LeadTable";
@@ -8,7 +8,7 @@ import ActivityPanel from "../components/ActivityPanel";
 import DownloadModal from "../components/DownloadModal";
 import { ALL_STATUSES } from "../utils/statusConfig";
 
-// ── Empty state ─────────────────────────────────────────────────────────────
+// ── Empty state ──────────────────────────────────────────────────────────────
 
 function EmptyPanel({ icon, title, subtitle }) {
   return (
@@ -49,12 +49,15 @@ function Dashboard() {
   const [activeTab, setActiveTab] = useState("new");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
-  // Use a ref to hold the selected-lead unsub so handleSelectLead can be stable (no deps)
+  // Undo/redo stacks — each entry: { id, leadId, leadName, description, prevFields, newFields, timestamp }
+  const [undoStack, setUndoStack] = useState([]);
+  const [redoStack, setRedoStack] = useState([]);
+
   const selectedLeadUnsubRef = useRef(null);
 
   // ── Single real-time collection listener ─────────────────────────────────
-  // Powers both the lead list AND the stats strip — no duplicate subscriptions.
   useEffect(() => {
     const q = query(collection(db, "admissions"), orderBy("createdAt", "desc"));
     const unsub = onSnapshot(q, (snap) => {
@@ -74,7 +77,7 @@ function Dashboard() {
     return counts;
   }, [leads]);
 
-  // ── Per-lead real-time listener (for selected lead's live detail + activity) ─
+  // ── Per-lead real-time listener ──────────────────────────────────────────
   const handleSelectLead = useCallback((lead) => {
     if (selectedLeadUnsubRef.current) selectedLeadUnsubRef.current();
     const unsub = onSnapshot(doc(db, "admissions", lead.id), (snap) => {
@@ -83,8 +86,57 @@ function Dashboard() {
     selectedLeadUnsubRef.current = unsub;
   }, []);
 
-  // Cleanup on unmount
   useEffect(() => () => { if (selectedLeadUnsubRef.current) selectedLeadUnsubRef.current(); }, []);
+
+  // ── Undo / Redo history ──────────────────────────────────────────────────
+
+  // Called by LeadDetails after a successful save
+  const pushHistory = useCallback((entry) => {
+    setUndoStack((prev) => [...prev.slice(-4), entry]); // keep max 5
+    setRedoStack([]);
+  }, []);
+
+  // Revert a specific history entry (from the modal)
+  const handleUndoEntry = useCallback(async (entry) => {
+    try {
+      await updateDoc(doc(db, "admissions", entry.leadId), {
+        ...entry.prevFields,
+        activities: arrayUnion({
+          type: "status",
+          from: entry.newFields.status,
+          to: entry.prevFields.status,
+          text: `Reverted: ${entry.description}`,
+          createdAt: new Date(),
+        }),
+      });
+      setUndoStack((prev) => prev.filter((e) => e.id !== entry.id));
+      setRedoStack((prev) => [...prev.slice(-4), entry]);
+    } catch (err) {
+      console.error("Revert failed:", err);
+    }
+  }, []);
+
+  // Re-apply the most recent undo
+  const handleRedo = useCallback(async () => {
+    if (!redoStack.length) return;
+    const entry = redoStack[redoStack.length - 1];
+    try {
+      await updateDoc(doc(db, "admissions", entry.leadId), {
+        ...entry.newFields,
+        activities: arrayUnion({
+          type: "status",
+          from: entry.prevFields.status,
+          to: entry.newFields.status,
+          text: `Re-applied: ${entry.description}`,
+          createdAt: new Date(),
+        }),
+      });
+      setRedoStack((prev) => prev.slice(0, -1));
+      setUndoStack((prev) => [...prev.slice(-4), entry]);
+    } catch (err) {
+      console.error("Redo failed:", err);
+    }
+  }, [redoStack]);
 
   return (
     <div className="h-screen flex flex-col bg-[#f4f6f8] overflow-hidden">
@@ -92,6 +144,12 @@ function Dashboard() {
         activeTab={activeTab}
         onTabChange={setActiveTab}
         onOpenDownload={() => setIsDownloadOpen(true)}
+        undoStack={undoStack}
+        redoStack={redoStack}
+        onUndoEntry={handleUndoEntry}
+        onRedo={handleRedo}
+        isHistoryOpen={isHistoryOpen}
+        onToggleHistory={() => setIsHistoryOpen((v) => !v)}
       />
 
       {/* ── Stats Strip ──────────────────────────────────────────────────── */}
@@ -129,7 +187,7 @@ function Dashboard() {
         {/* Lead Details */}
         <div className="w-[37%] min-w-[300px] flex flex-col bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           {selectedLead ? (
-            <LeadDetails lead={selectedLead} />
+            <LeadDetails lead={selectedLead} onSave={pushHistory} />
           ) : (
             <EmptyPanel
               icon={<PersonIcon className="w-5 h-5 text-gray-300" />}
