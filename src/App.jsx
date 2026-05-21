@@ -60,6 +60,7 @@ import criticalHeroImage from './assets/home/Hero-imgs/1.jpg';
 import GalleryTiles from './components/Home/GalleryTiles';
 import AQAR2024_25 from './pages/NAAC/AQAR2024_25';
 import AdmissionForm from './pages/AdmissionForm';
+import ThankYou from './pages/ThankYou';
 import Login from './pages/AdsLeads/pages/Login';
 import Dashboard from './pages/AdsLeads/pages/Dashboard';
 import StudentPortal from './pages/StudentPortal';
@@ -228,6 +229,7 @@ function App() {
             <Route path="/extended-profile" element={<ExtendedProfiles />} />
             <Route path="/gallery" element={<GalleryTiles />} />
             <Route path="/admission-form" element={<AdmissionForm />} />
+            <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/login" element={<Login />} />
             <Route path="/student-portal" element={<StudentPortal />} />
             <Route

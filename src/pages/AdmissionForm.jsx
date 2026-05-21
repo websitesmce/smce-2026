@@ -2,7 +2,7 @@ import { useState } from "react";
 import { db } from "../services/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import logo from "../assets/logo/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const branchOptions = {
   "B.Tech": ["CSE", "CSE-AI", "CSE-DS", "IT", "ECE"],
@@ -65,46 +65,11 @@ function HighlightCard({ title, desc }) {
   );
 }
 
-function SuccessState({ userId }) {
-  return (
-    <div className="max-w-lg mx-auto text-center bg-white rounded-2xl shadow-md border border-gray-100 p-12">
-      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
-        <svg
-          className="w-8 h-8 text-green-600"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2.5}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-        </svg>
-      </div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-2">Application Received!</h2>
-      <p className="text-gray-500 mb-6 leading-relaxed">
-        Our admissions counsellor will call you within{" "}
-        <span className="font-semibold text-gray-800">24 hours</span> to guide you
-        through the next steps.
-      </p>
-      <div className="bg-gray-50 border border-gray-100 rounded-xl px-6 py-4 inline-block">
-        <p className="text-xs text-gray-400 uppercase tracking-wide">Reference ID</p>
-        <p className="font-bold text-[#800000] text-xl mt-1">{userId}</p>
-      </div>
-      <div className="mt-6 pt-6 border-t border-gray-100">
-        <p className="text-sm text-gray-500 mb-1">Need immediate help? Call us:</p>
-        <a href="tel:+919000447117" className="text-[#800000] font-bold text-lg hover:underline">
-          +91-90004-47117
-        </a>
-      </div>
-    </div>
-  );
-}
-
 export default function AdmissionForm() {
   const [form, setForm] = useState({ name: "", phone: "", course: "", branch: "" });
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [userId, setUserId] = useState("");
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const validate = () => {
     const e = {};
@@ -131,7 +96,6 @@ export default function AdmissionForm() {
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setLoading(true);
     const uid = generateUID();
-    setUserId(uid);
     try {
       await addDoc(collection(db, "admissions"), {
         ...form,
@@ -139,10 +103,9 @@ export default function AdmissionForm() {
         createdAt: serverTimestamp(),
         status: "new",
       });
-      setSubmitted(true);
+      navigate(`/thank-you?ref=${uid}`);
     } catch (err) {
       console.error(err);
-    } finally {
       setLoading(false);
     }
   };
@@ -202,12 +165,9 @@ export default function AdmissionForm() {
 
       {/* Main Content */}
       <div className="max-w-5xl mx-auto px-6 py-12">
-        {submitted ? (
-          <SuccessState userId={userId} />
-        ) : (
-          <div className="grid md:grid-cols-5 gap-8 items-start">
-            {/* Form Card */}
-            <div className="md:col-span-3">
+        <div className="grid md:grid-cols-5 gap-8 items-start">
+          {/* Form Card */}
+          <div className="md:col-span-3">
               <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-1">Apply Now</h2>
                 <p className="text-gray-400 text-sm mb-7">
@@ -329,7 +289,6 @@ export default function AdmissionForm() {
               </div>
             </div>
           </div>
-        )}
       </div>
 
       {/* Contact Footer */}
