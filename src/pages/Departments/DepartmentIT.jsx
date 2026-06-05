@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { BookText, FolderKanban, Info, Target, Cpu } from "lucide-react";
+import { BookText, FolderKanban, Info, Target, Cpu, Users } from "lucide-react";
+import FacultyTable from "./FacultyTable";
 import {
   IconBrain,
   IconMicrophone,
@@ -24,12 +25,25 @@ import labImg10 from "../../assets/labs/cse-lab10.png";
 import labImg11 from "../../assets/labs/cse-lab11.png";
 import labImg12 from "../../assets/labs/cse-lab12.png";
 
+const itFaculty = [
+  { name: "Dr. K.SUDHAKAR BABU", designation: "Professor", qualification: "Ph.D., M. Tech" },
+  { name: "A.RAJESH", designation: "Associate Professor", qualification: "M.Tech-ECE" },
+  { name: "MURIKIPUDI VENKATA SWAMY", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "SOMU SATISH KUMAR", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "ADDANKI JYOTHI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "SHAIK JASMIN TAJ", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "TUMMALACHERUVU RAMA KRISHNA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "NEMALA V VENKATESWARA RAO", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "THADIGIRI SOWNDARYA", designation: "Assistant Professor", qualification: "MBA" },
+];
+
 const tabs = [
   { title: "About Department", icon: <Info size={16} /> },
   { title: "PEOs/POs/PSOs", icon: <Target size={16} /> },
   { title: "Course Structure", icon: <BookText size={16} /> },
   { title: "Laboratories", icon: <Cpu size={16} /> },
   { title: "Activities & Events", icon: <FolderKanban size={16} /> },
+  { title: "Faculty", icon: <Users size={16} /> },
 ];
 
 export default function DepartmentIT() {
@@ -596,6 +610,10 @@ export default function DepartmentIT() {
           <div className="text-center text-gray-500 py-10 text-sm">
             Content for "{tabs[activeTab].title}" coming soon.
           </div>
+        )}
+
+        {activeTab === 5 && (
+          <FacultyTable faculty={itFaculty} departmentName="Information Technology" />
         )}
       </div>
     </section>

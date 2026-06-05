@@ -7,7 +7,9 @@ import {
   Target,
   Cpu,
   FileText,
+  Users,
 } from "lucide-react";
+import FacultyTable from "./FacultyTable";
 import {
   IconCpu,
   IconWaveSawTool,
@@ -35,6 +37,21 @@ import labImg12 from "../../assets/labs/ece-lab12.png";
 import labImg13 from "../../assets/labs/ece-lab13.png";
 import labImg14 from "../../assets/labs/ece-lab14.png";
 
+const eceFaculty = [
+  { name: "Dr. M.NAGESWARARAO", designation: "Professor", qualification: "Ph.D., M. Tech" },
+  { name: "CH SRINIVASA RAO", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "HANISH CHAITANYA BODEPUDI", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "T.SURESH", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "M PARAMESWARARAO", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "MACHERLA YAMINI SARASWATHI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "E DASARADHA RAMIREDDY", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "G SAI LAKSHMI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "KANALA MURALIKRISHNA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "PRADEEP PANUGANTI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "D.SIVA PARVATHI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "SK.SHABANA", designation: "Assistant Professor", qualification: "M.Tech" },
+];
+
 const tabs = [
   { title: "About Department", icon: <Info size={16} /> },
   { title: "PEOs/POs/PSOs", icon: <Target size={16} /> },
@@ -42,6 +59,7 @@ const tabs = [
   { title: "Laboratories", icon: <Cpu size={16} /> },
   { title: "Activities & Events", icon: <FolderKanban size={16} /> },
   { title: "Course Files & Lab Manuals", icon: <FileText size={16} /> },
+  { title: "Faculty", icon: <Users size={16} /> },
 ];
 
 export default function DepartmentECE() {
@@ -575,6 +593,10 @@ export default function DepartmentECE() {
               </div>
             </div>
           </div>
+        )}
+
+        {activeTab === 6 && (
+          <FacultyTable faculty={eceFaculty} departmentName="ECE" />
         )}
       </div>
     </section>

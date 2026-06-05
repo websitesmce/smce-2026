@@ -134,11 +134,11 @@ const linksData = [
         href: "/ece-department",
         detail: "Electronics and Communication Engineering.",
       },
-      // {
-      //   label: "SNH",
-      //   href: "/sh-department",
-      //   detail: "Science & Humanities Department.",
-      // },
+      {
+        label: "AS&H",
+        href: "/sh-department",
+        detail: "Applied Sciences & Humanities Department.",
+      },
       {
         label: "MBA",
         href: "/mba-department",

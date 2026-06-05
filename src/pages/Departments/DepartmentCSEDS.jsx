@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { BookText, FolderKanban, Info, Target, Cpu } from "lucide-react";
+import { BookText, FolderKanban, Info, Target, Cpu, Users } from "lucide-react";
+import FacultyTable from "./FacultyTable";
 import {
   IconBrain,
   IconMicrophone,
@@ -26,12 +27,28 @@ import labImg12 from "../../assets/labs/cse-lab12.png";
 // import labImg13 from "../../assets/labs/cse-lab13.png";
 // import labImg14 from "../../assets/labs/cse-lab14.png";
 
+const cseDSFaculty = [
+  { name: "Dr. M VENKATA RAMANA", designation: "Associate Professor", qualification: "Ph.D., M. Tech" },
+  { name: "B MRUDHULA", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "J. RAMESH", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "L.KALPANA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "P.RAMYA LAVANYA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "T CHAKRAVARTHI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "THADIGIRI PRIYANKA", designation: "Assistant Professor", qualification: "MBA" },
+  { name: "A.AKHILA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "NUTHALAPATI SPANDANA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "MURIKIPUDI HEMANTH RUSHI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "VIDAPALAPATI RADHIKA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "ANITHA MURARI", designation: "Assistant Professor", qualification: "M.Tech-ECE" },
+];
+
 const tabs = [
   { title: "About Department", icon: <Info size={16} /> },
   { title: "PEOs/POs/PSOs", icon: <Target size={16} /> },
   { title: "Course Structure", icon: <BookText size={16} /> },
   { title: "Laboratories", icon: <Cpu size={16} /> },
   { title: "Activities & Events", icon: <FolderKanban size={16} /> },
+  { title: "Faculty", icon: <Users size={16} /> },
 ];
 
 export default function DepartmentCSEDS() {
@@ -608,6 +625,10 @@ export default function DepartmentCSEDS() {
           <div className="text-center text-gray-500 py-10 text-sm">
             Content for "{tabs[activeTab].title}" coming soon.
           </div>
+        )}
+
+        {activeTab === 5 && (
+          <FacultyTable faculty={cseDSFaculty} departmentName="CSE (Data Science)" />
         )}
       </div>
     </section>

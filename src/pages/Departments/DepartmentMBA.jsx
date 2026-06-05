@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { BookText, FolderKanban, Cpu, Target } from "lucide-react";
+import { BookText, FolderKanban, Cpu, Target, Users } from "lucide-react";
+import FacultyTable from "./FacultyTable";
 import labImg1 from "../../assets/labs/cse-lab1.png";
 import labImg2 from "../../assets/labs/cse-lab2.png";
 import labImg3 from "../../assets/labs/cse-lab3.png";
@@ -14,11 +15,21 @@ import labImg10 from "../../assets/labs/cse-lab10.png";
 import labImg11 from "../../assets/labs/cse-lab11.png";
 import labImg12 from "../../assets/labs/cse-lab12.png";
 
+const mbaFaculty = [
+  { name: "Dr. SHAIK JEELANI SHAREEF", designation: "Professor", qualification: "Ph.D, MBA" },
+  { name: "YAMARAPU MOHANA RAO", designation: "Associate Professor", qualification: "MBA" },
+  { name: "GUGGILAM SAIRAGHUNATH", designation: "Assistant Professor", qualification: "MBA" },
+  { name: "V.GOPI CHAND", designation: "Assistant Professor", qualification: "MBA" },
+  { name: "G.UMA SUNDARI", designation: "Assistant Professor", qualification: "MBA" },
+  { name: "MACHAVARAM TIRUPATIREDDY", designation: "Assistant Professor", qualification: "MBA" },
+];
+
 const tabs = [
   { title: "POs", icon: <Target size={16} /> },
   { title: "Course Structure", icon: <BookText size={16} /> },
   { title: "Laboratories", icon: <Cpu size={16} /> },
   { title: "Activities & Events", icon: <FolderKanban size={16} /> },
+  { title: "Faculty", icon: <Users size={16} /> },
 ];
 
 export default function DepartmentMBA() {
@@ -235,6 +246,10 @@ export default function DepartmentMBA() {
           <div className="text-center text-gray-500 py-10 text-sm">
             Content for "{tabs[activeTab].title}" coming soon.
           </div>
+        )}
+
+        {activeTab === 4 && (
+          <FacultyTable faculty={mbaFaculty} departmentName="MBA" />
         )}
       </div>
     </section>

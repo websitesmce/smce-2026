@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { BookText, FolderKanban, Info, Target, Cpu } from "lucide-react";
+import { BookText, FolderKanban, Info, Target, Cpu, Users } from "lucide-react";
+import FacultyTable from "./FacultyTable";
 import {
   IconBrain,
   IconMicrophone,
@@ -24,12 +25,49 @@ import labImg10 from "../../assets/labs/cse-lab10.png";
 import labImg11 from "../../assets/labs/cse-lab11.png";
 import labImg12 from "../../assets/labs/cse-lab12.png";
 
+const cseFaculty = [
+  { name: "Dr. S. GOPI KRISHNA", designation: "Professor", qualification: "Ph.D., M. Tech" },
+  { name: "Dr. MADDI VENKATA PAVAN", designation: "Professor", qualification: "Ph.D., M. Tech" },
+  { name: "Dr. VENKAT D", designation: "Professor", qualification: "Ph.D., M. Tech" },
+  { name: "Y HARIKA", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "G MALLIKHARJUNA RAO", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "CH.V.S.N.MURTHY", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "SUDHAKARA RAO GERA", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "MAMILLAPALLI SUDHEER", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "BURRA AYYAPPA SWAMY", designation: "Associate Professor", qualification: "M.Tech-ECE, Ph.D." },
+  { name: "B SUNIL KUMAR", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "B RAJEEV SINGH", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "D HAPPY BALASOWRI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "T RAMESH", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "B.ANJANEYULU", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "UNDRAKONDA NARENDRA BABU", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "THOTA HYMA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "GUDDETI VENKATA SIVARAM", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "M.AJAY BABU", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "Y.MANOGNA SARANI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "P.PARDHA SARADHI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "MADUGULA PRANAVI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "G HARI CHANDANA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "GOTTAM VIJAYA LAKSHMI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "KARUPPUSAMY P", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "JAYA KUMARAN", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "SURESH NARAYANAN", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "UPPALA SNEHA LATHA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "PUTTA MOUNIKA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "K.G.CHAKRAVARTHY", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "GONAVATH ASHOK NAIK", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "POORNI LAKSHMI TRIVENI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "U. SATHYANANTHAM", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "K.DILEEP KUMAR", designation: "Assistant Professor", qualification: "MBA" },
+];
+
 const tabs = [
   { title: "About Department", icon: <Info size={16} /> },
   { title: "PEOs/POs/PSOs", icon: <Target size={16} /> },
   { title: "Course Structure", icon: <BookText size={16} /> },
   { title: "Laboratories", icon: <Cpu size={16} /> },
   { title: "Activities & Events", icon: <FolderKanban size={16} /> },
+  { title: "Faculty", icon: <Users size={16} /> },
 ];
 
 export default function DepartmentCSE() {
@@ -655,6 +693,10 @@ export default function DepartmentCSE() {
           <div className="text-center text-gray-500 py-10 text-sm">
             Content for "{tabs[activeTab].title}" coming soon.
           </div>
+        )}
+
+        {activeTab === 5 && (
+          <FacultyTable faculty={cseFaculty} departmentName="CSE" />
         )}
       </div>
     </section>

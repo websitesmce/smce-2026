@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { BookText, FolderKanban, Info, Target, Cpu } from "lucide-react";
+import { BookText, FolderKanban, Info, Target, Cpu, Users } from "lucide-react";
+import FacultyTable from "./FacultyTable";
 import {
   IconBrain,
   IconMicrophone,
@@ -27,12 +28,34 @@ import labImg12 from "../../assets/labs/cse-lab12.png";
 // import labImg14 from "../../assets/labs/cse-lab14.png";
 
 
+const cseAIFaculty = [
+  { name: "Dr. J.SIVA SANKAR", designation: "Professor", qualification: "Ph.D., M. Tech" },
+  { name: "Dr. J. NAGA MALLESWARA RAO", designation: "Professor", qualification: "Ph.D., M. Tech" },
+  { name: "K RAJYA LAKSHMI", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "M.NARENDRA", designation: "Associate Professor", qualification: "M.Tech-ECE" },
+  { name: "KANDRAKONDA VIJAY KUMAR", designation: "Associate Professor", qualification: "M.Tech-ECE" },
+  { name: "BOMMALAPURAM SURESH", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "P.SRINIVASULA REDDY", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "Y. YESU BABU", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "K.MOHANA SIVA NAGA MALLI", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "B RANI PRASANTHI", designation: "Assistant Professor", qualification: "MBA" },
+  { name: "BEJJAM SWARNATEJA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "KOPPULA RATNA CHAITANYA", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "T VENKATA RAO", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "KUPPALA SIVA GOPAL", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "SCHULZ GOPI REDDY", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "KARTHIK.V", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "P.SACHIN BHARAT", designation: "Assistant Professor", qualification: "M.Tech" },
+  { name: "K.SOORAJ", designation: "Assistant Professor", qualification: "M.Tech" },
+];
+
 const tabs = [
   { title: "About Department", icon: <Info size={16} /> },
   { title: "PEOs/POs/PSOs", icon: <Target size={16} /> },
   { title: "Course Structure", icon: <BookText size={16} /> },
   { title: "Laboratories", icon: <Cpu size={16} /> },
   { title: "Activities & Events", icon: <FolderKanban size={16} /> },
+  { title: "Faculty", icon: <Users size={16} /> },
 ];
 
 export default function DepartmentCSEAI() {
@@ -629,6 +652,10 @@ export default function DepartmentCSEAI() {
           <div className="text-center text-gray-500 py-10 text-sm">
             Content for "{tabs[activeTab].title}" coming soon.
           </div>
+        )}
+
+        {activeTab === 5 && (
+          <FacultyTable faculty={cseAIFaculty} departmentName="CSE (AI)" />
         )}
       </div>
     </section>
