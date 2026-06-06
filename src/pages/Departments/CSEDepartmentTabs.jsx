@@ -59,6 +59,9 @@ const cseFaculty = [
   { name: "POORNI LAKSHMI TRIVENI", designation: "Assistant Professor", qualification: "M.Tech" },
   { name: "U. SATHYANANTHAM", designation: "Assistant Professor", qualification: "M.Tech" },
   { name: "K.DILEEP KUMAR", designation: "Assistant Professor", qualification: "MBA" },
+  { name: "Dr. M.RAMESH", designation: "Professor", qualification: "Ph.D., M. Tech" },
+  { name: "A.MALATHI", designation: "Associate Professor", qualification: "M.Tech" },
+  { name: "P.SWAROOP", designation: "Associate Professor", qualification: "M.Tech" },
 ];
 
 const tabs = [
