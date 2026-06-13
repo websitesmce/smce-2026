@@ -1,5 +1,6 @@
 import { useSearchParams, Link } from "react-router-dom";
 import logo from "../assets/logo/logo.png";
+import PlacementHighlights from "../components/PlacementHighlights";
 
 // Department images for program cards
 import imgCSE    from "../assets/department-img/cse-main.jpeg";
@@ -142,6 +143,9 @@ export default function ThankYou() {
           </div>
         </div>
       </div>
+
+      {/* ── Placements Highlights ──────────────────────────────────────────── */}
+      <PlacementHighlights showCta={false} />
 
       {/* ── Explore Programs ───────────────────────────────────────────────── */}
       <div className="bg-[#f8f9fb] py-14">

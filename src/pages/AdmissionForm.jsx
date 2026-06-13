@@ -3,6 +3,8 @@ import { db } from "../services/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import logo from "../assets/logo/logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
+import PlacementHighlights from "../components/PlacementHighlights";
 
 const branchOptions = {
   "B.Tech": ["CSE", "CSE-AI", "CSE-DS", "IT", "ECE"],
@@ -132,13 +134,24 @@ export default function AdmissionForm() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
             Begin Your Engineering
-            <br className="hidden md:block" />
+            <br />
             <span className="text-yellow-300">Journey at SMCE</span>
           </h1>
           <p className="text-white/70 text-base max-w-xl mx-auto leading-relaxed">
             Sri Mittapalli College of Engineering &mdash; Autonomous &bull;{" "}
             <span className="text-amber-300 font-semibold">NAAC A+ Grade</span> &bull; NBA Accredited
           </p>
+          <a
+            href="#placements"
+            className="group inline-flex flex-col items-center gap-2 mt-9 text-white/70 hover:text-white transition-colors"
+          >
+            <span className="text-xs font-semibold uppercase tracking-widest">
+              See Where Our Students Land
+            </span>
+            <span className="w-9 h-9 rounded-full border border-white/30 flex items-center justify-center group-hover:border-white/60 group-hover:bg-white/10 transition-all animate-bounce">
+              <ChevronDown size={18} />
+            </span>
+          </a>
         </div>
       </div>
 
@@ -164,7 +177,7 @@ export default function AdmissionForm() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-5xl mx-auto px-6 py-12">
+      <div id="apply-form" className="max-w-5xl mx-auto px-6 py-12 scroll-mt-24">
         <div className="grid md:grid-cols-5 gap-8 items-start">
           {/* Form Card */}
           <div className="md:col-span-3">
@@ -290,6 +303,9 @@ export default function AdmissionForm() {
             </div>
           </div>
       </div>
+
+      {/* Placements Highlights */}
+      <PlacementHighlights ctaHref="#apply-form" />
 
       {/* Contact Footer */}
       <div className="max-w-5xl mx-auto px-6 pb-16">
