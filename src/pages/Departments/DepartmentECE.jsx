@@ -59,7 +59,7 @@ const tabs = [
   { title: "Laboratories", icon: <Cpu size={16} /> },
   { title: "Activities & Events", icon: <FolderKanban size={16} /> },
   { title: "Course Files & Lab Manuals", icon: <FileText size={16} /> },
-  { title: "Faculty", icon: <Users size={16} /> },
+  // { title: "Faculty", icon: <Users size={16} /> },
 ];
 
 export default function DepartmentECE() {

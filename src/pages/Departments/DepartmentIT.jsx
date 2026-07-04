@@ -43,7 +43,7 @@ const tabs = [
   { title: "Course Structure", icon: <BookText size={16} /> },
   { title: "Laboratories", icon: <Cpu size={16} /> },
   { title: "Activities & Events", icon: <FolderKanban size={16} /> },
-  { title: "Faculty", icon: <Users size={16} /> },
+  // { title: "Faculty", icon: <Users size={16} /> },
 ];
 
 export default function DepartmentIT() {
