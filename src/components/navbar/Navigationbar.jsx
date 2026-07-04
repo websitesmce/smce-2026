@@ -264,16 +264,58 @@ const linksData = [
         label: "Governing Body",
         href: "/governing-body",
         detail: "Oversight committee for policy and vision.",
+        documents: [
+          {
+            label: "AY 2023-2024",
+            href: "/public/pdfs/GoverningBody/GoverningBody2023-24.pdf",
+          },
+          {
+            label: "AY 2024-2025",
+            href: "/public/pdfs/GoverningBody/GoverningBody2024-25.pdf",
+          },
+          {
+            label: "AY 2025-2026",
+            href: "/public/pdfs/GoverningBody/GoverningBody2025-26.pdf",
+          },
+        ],
       },
       {
         label: "Academic Council",
         href: "/academic-council",
         detail: "Regulates academic activities and changes.",
+        documents: [
+          {
+            label: "AY 2023-2024",
+            href: "/public/pdfs/AcademicCouncil/AcademicCouncil2023-24.pdf",
+          },
+          {
+            label: "AY 2024-2025",
+            href: "/public/pdfs/AcademicCouncil/AcademicCouncil2024-25.pdf",
+          },
+          {
+            label: "AY 2025-2026",
+            href: "/public/pdfs/AcademicCouncil/AcademicCouncil2025-26.pdf",
+          },
+        ],
       },
       {
         label: "Board of Studies",
         href: "/board-of-studies",
         detail: "Department-level academic boards.",
+        documents: [
+          {
+            label: "AY 2023-2024",
+            href: "/public/pdfs/BOS/1stBOS.pdf",
+          },
+          {
+            label: "AY 2024-2025",
+            href: "/public/pdfs/BOS/2ndBOS.pdf",
+          },
+          {
+            label: "AY 2025-2026",
+            href: "/public/pdfs/BOS/3rdBOS.pdf",
+          },
+        ],
       },
       // {
       //   label: "BOS",
@@ -538,7 +580,7 @@ function Navigationbar() {
                 </h4>
                 <ul className="space-y-2">
                   {activeLink.subLinks.map((sublink, i) => (
-                    <li key={i}>
+                    <li key={i} className="group/document relative">
                       {sublink.external ? (
                         <a
                           href={sublink.href}
@@ -560,6 +602,25 @@ function Navigationbar() {
                         >
                           {sublink.label}
                         </Link>
+                      )}
+                      {sublink.documents && (
+                        <ul className="invisible absolute left-[calc(100%+0.5rem)] top-0 z-20 min-w-[150px] rounded-md border border-gray-200 bg-white p-2 opacity-0 shadow-lg transition-all duration-150 group-hover/document:visible group-hover/document:opacity-100 group-focus-within/document:visible group-focus-within/document:opacity-100">
+                          {sublink.documents.map((documentLink) => (
+                            <li key={documentLink.href}>
+                              <a
+                                href={documentLink.href}
+                                download
+                                className="block rounded-md px-3 py-2 text-xs font-medium text-gray-700 transition-all duration-150 hover:bg-[#800000]/10 hover:text-[#800000] focus:outline-none focus:ring-2 focus:ring-[#800000]/30"
+                                aria-label={`Download ${sublink.label} ${documentLink.label} document`}
+                                onClick={handleSubLinkClick}
+                                onMouseEnter={() => setHoveredSubLink(i)}
+                                onMouseLeave={() => setHoveredSubLink(null)}
+                              >
+                                {documentLink.label}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
                       )}
                     </li>
                   ))}

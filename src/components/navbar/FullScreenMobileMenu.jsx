@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import { ArrowLeft, Menu } from "lucide-react";
+import { ArrowLeft, ChevronDown, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 
 function FullScreenMobileMenu({ linksData }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
+  const [expandedDocumentLink, setExpandedDocumentLink] = useState(null);
   const menuRef = useRef(null);
   const tapRefs = useRef([]);
 
@@ -31,15 +32,24 @@ function FullScreenMobileMenu({ linksData }) {
       { scale: 0.98 },
       { scale: 1, duration: 0.2, ease: "power1.out" }
     );
+    setExpandedDocumentLink(null);
     setTimeout(() => setActiveSection(index), 100);
   };
 
-  const goBack = () => setActiveSection(null);
+  const goBack = () => {
+    setActiveSection(null);
+    setExpandedDocumentLink(null);
+  };
 
   const handleLinkClick = () => {
     // Smoothly close the menu after link click
     setIsOpen(false);
     setActiveSection(null);
+    setExpandedDocumentLink(null);
+  };
+
+  const toggleDocumentLinks = (index) => {
+    setExpandedDocumentLink((current) => (current === index ? null : index));
   };
 
   return (
@@ -105,13 +115,65 @@ function FullScreenMobileMenu({ linksData }) {
             <ul className="space-y-3">
               {linksData[activeSection].subLinks.map((sublink, i) => (
                 <li key={i}>
-                  <Link
-                    to={sublink.href}
-                    onClick={handleLinkClick}
-                    className="block text-base font-medium text-gray-800 bg-gray-100 rounded-md px-4 py-2 active:scale-[0.97] transition-transform duration-150"
-                  >
-                    {sublink.label}
-                  </Link>
+                  {sublink.documents ? (
+                    <div className="flex overflow-hidden rounded-md bg-gray-100">
+                      <Link
+                        to={sublink.href}
+                        onClick={handleLinkClick}
+                        className="block min-w-0 flex-1 px-4 py-2 text-base font-medium text-gray-800 active:scale-[0.97] transition-transform duration-150"
+                      >
+                        {sublink.label}
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => toggleDocumentLinks(i)}
+                        className="flex w-12 shrink-0 items-center justify-center border-l border-gray-200 text-[#800000]"
+                        aria-expanded={expandedDocumentLink === i}
+                        aria-label={`Show ${sublink.label} academic year documents`}
+                      >
+                        <ChevronDown
+                          className={`h-5 w-5 transition-transform duration-150 ${
+                            expandedDocumentLink === i ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                    </div>
+                  ) : sublink.external ? (
+                    <a
+                      href={sublink.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={handleLinkClick}
+                      className="block text-base font-medium text-gray-800 bg-gray-100 rounded-md px-4 py-2 active:scale-[0.97] transition-transform duration-150"
+                    >
+                      {sublink.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={sublink.href}
+                      onClick={handleLinkClick}
+                      className="block text-base font-medium text-gray-800 bg-gray-100 rounded-md px-4 py-2 active:scale-[0.97] transition-transform duration-150"
+                    >
+                      {sublink.label}
+                    </Link>
+                  )}
+                  {sublink.documents && expandedDocumentLink === i && (
+                    <ul className="mt-2 grid gap-2 pl-3">
+                      {sublink.documents.map((documentLink) => (
+                        <li key={documentLink.href}>
+                          <a
+                            href={documentLink.href}
+                            download
+                            onClick={handleLinkClick}
+                            className="block rounded-md border border-[#800000]/15 bg-white px-4 py-2 text-sm font-medium text-[#800000] active:scale-[0.97] transition-transform duration-150"
+                            aria-label={`Download ${sublink.label} ${documentLink.label} document`}
+                          >
+                            {documentLink.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
             </ul>
