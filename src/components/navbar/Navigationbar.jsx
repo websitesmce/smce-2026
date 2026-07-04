@@ -267,15 +267,15 @@ const linksData = [
         documents: [
           {
             label: "AY 2023-2024",
-            href: "/public/pdfs/GoverningBody/GoverningBody2023-24.pdf",
+            href: "/pdfs/GoverningBody/GoverningBody2023-24.pdf",
           },
           {
             label: "AY 2024-2025",
-            href: "/public/pdfs/GoverningBody/GoverningBody2024-25.pdf",
+            href: "/pdfs/GoverningBody/GoverningBody2024-25.pdf",
           },
           {
             label: "AY 2025-2026",
-            href: "/public/pdfs/GoverningBody/GoverningBody2025-26.pdf",
+            href: "/pdfs/GoverningBody/GoverningBody2025-26.pdf",
           },
         ],
       },
@@ -286,15 +286,15 @@ const linksData = [
         documents: [
           {
             label: "AY 2023-2024",
-            href: "/public/pdfs/AcademicCouncil/AcademicCouncil2023-24.pdf",
+            href: "/pdfs/AcademicCouncil/AcademicCouncil2023-24.pdf",
           },
           {
             label: "AY 2024-2025",
-            href: "/public/pdfs/AcademicCouncil/AcademicCouncil2024-25.pdf",
+            href: "/pdfs/AcademicCouncil/AcademicCouncil2024-25.pdf",
           },
           {
             label: "AY 2025-2026",
-            href: "/public/pdfs/AcademicCouncil/AcademicCouncil2025-26.pdf",
+            href: "/pdfs/AcademicCouncil/AcademicCouncil2025-26.pdf",
           },
         ],
       },
@@ -305,15 +305,15 @@ const linksData = [
         documents: [
           {
             label: "AY 2023-2024",
-            href: "/public/pdfs/BOS/1stBOS.pdf",
+            href: "/pdfs/BOS/1stBOS.pdf",
           },
           {
             label: "AY 2024-2025",
-            href: "/public/pdfs/BOS/2ndBOS.pdf",
+            href: "/pdfs/BOS/2ndBOS.pdf",
           },
           {
             label: "AY 2025-2026",
-            href: "/public/pdfs/BOS/3rdBOS.pdf",
+            href: "/pdfs/BOS/3rdBOS.pdf",
           },
         ],
       },
